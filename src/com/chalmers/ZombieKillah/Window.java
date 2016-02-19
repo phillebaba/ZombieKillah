@@ -1,8 +1,10 @@
+package com.chalmers.ZombieKillah;
+
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by Jeppe on 2016-02-19.
+ * Created by Jesper Rask on 2016-02-19.
  */
 public class Window {
 
@@ -13,14 +15,14 @@ public class Window {
     private Canvas canvas;
 
 
-    public Window (int width, int height, String name) {
+    public Window(int width, int height, String name) {
         this.width = width;
         this.height = height;
         this.name = name;
-        pic ();
+        pic();
     }
 
-    private void pic (){
+    private void pic() {
 
         canvas = new Canvas();
         canvas.setMaximumSize(new Dimension(width, height));
@@ -37,20 +39,4 @@ public class Window {
         JR.add(canvas);
         JR.pack();
     }
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
