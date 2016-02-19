@@ -1,7 +1,7 @@
 package com.chalmers.ZombieKillah;
 
 /**
- * Created by Philip on 19/02/16.
+ * Created by Philip Laine on 19/02/16.
  */
 public class Controller implements Runnable {
     private Game game;
