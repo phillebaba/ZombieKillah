@@ -9,26 +9,26 @@ public class Window {
     private JFrame JR;
     private int width;
     private int height;
-    private String namn;
+    private String name;
     private Canvas canvas;
 
 
-    public Window (int bredd, int hojjd, String namn) {
-        this.bredd = bredd;
-        this.hojjd = hojjd;
-        this.namn = namn;
-        bild ();
+    public Window (int width, int height, String name) {
+        this.width = width;
+        this.height = height;
+        this.name = name;
+        pic ();
     }
 
-    private void (){
+    private void pic (){
 
         canvas = new Canvas();
-        canvas.setMaximumSize(new Dimension(bredd, hojjd));
-        canvas.setMinimumSize(new Dimension(bredd, hojjd));
-        canvas.setPreferredSize(new Dimension(bredd, hojjd));
+        canvas.setMaximumSize(new Dimension(width, height));
+        canvas.setMinimumSize(new Dimension(width, height));
+        canvas.setPreferredSize(new Dimension(width, height));
 
-        JR = new JFrame(namn);
-        JR.setSize(bredd, hojjd);
+        JR = new JFrame(name);
+        JR.setSize(width, height);
         JR.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JR.setVisible(true);
         JR.setLocationRelativeTo(null);
