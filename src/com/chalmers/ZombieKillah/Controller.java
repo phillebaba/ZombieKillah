@@ -17,7 +17,7 @@ public class Controller implements Runnable {
 
     public Controller(Game game) {
         this.game = game;
-        this.window = new Window(this);
+        this.window = new Window();
     }
 
     // Game engine states
