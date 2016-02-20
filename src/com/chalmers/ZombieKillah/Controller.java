@@ -1,5 +1,7 @@
 package com.chalmers.ZombieKillah;
 
+import java.util.Set;
+
 /**
  * Created by Philip Laine on 19/02/16.
  */
@@ -51,8 +53,8 @@ public class Controller implements Runnable {
             frameTime += passedTime;
 
             while (unprocessedTime >= frameCap) {
-                // Update game logic
-                // Check collisions
+                game.update(window.getInput().getKeys());
+                game.checkCollisions();
 
                 unprocessedTime -= frameCap;
                 render = true;
