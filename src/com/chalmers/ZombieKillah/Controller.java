@@ -38,7 +38,7 @@ public class Controller implements Runnable {
         double passedTime  = 0;
         double unprocessedTime = 0;
         double frameTime = 0;
-        int frames = 0;
+        int frameCount = 0;
 
         while (isRunning) {
             boolean render = false;
@@ -58,15 +58,15 @@ public class Controller implements Runnable {
                 render = true;
 
                 if (frameTime >= 1) {
-                    logFrameRate(frames);
+                    logFrameRate(frameCount);
                     frameTime = 0;
-                    frames = 0;
+                    frameCount = 0;
                 }
             }
 
             if (render) {
                 // Clear and draw window
-                frames++;
+                frameCount++;
             } else {
                 try {
                     Thread.sleep(1);
@@ -87,8 +87,6 @@ public class Controller implements Runnable {
     public void logFrameRate(int frameRate) {
         System.out.println(frameRate);
     }
-
-    // Getters
 
     public Window getWindow() {
         return window;
