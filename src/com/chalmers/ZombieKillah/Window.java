@@ -7,7 +7,7 @@ import java.awt.*;
  * Created by Jesper Rask on 2016-02-19.
  */
 public class Window {
-
+    private Input input;
     private JFrame JR;
     private int width;
     private int height;
@@ -16,6 +16,7 @@ public class Window {
 
 
     public Window(int width, int height, String name) {
+        this.input = new Input();
         this.width = width;
         this.height = height;
         this.name = name;
@@ -38,5 +39,9 @@ public class Window {
 
         JR.add(canvas);
         JR.pack();
+    }
+
+    public Input getInput() {
+        return input;
     }
 }
