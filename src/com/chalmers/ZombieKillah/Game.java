@@ -11,7 +11,7 @@ public abstract class Game {
     protected Player player;
     protected List<GameObject> objects;
 
-    protected abstract void update(Set<Integer> inputKeys);
+    protected abstract void update(Set<Integer> pressedKeys);
     protected abstract void objectsDidCollide(GameObject object1, GameObject object2);
 
     public Game() {
