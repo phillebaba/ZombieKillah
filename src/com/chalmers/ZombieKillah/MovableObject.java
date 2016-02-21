@@ -14,6 +14,7 @@ public class MovableObject extends GameObject {
             this.speed = speed;
     }
 
+
     protected void step(){
 
 
