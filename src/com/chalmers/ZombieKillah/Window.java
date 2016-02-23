@@ -9,43 +9,32 @@ import java.awt.image.BufferStrategy;
  */
 public class Window {
     private Input input;
-    private JFrame JR;
-    private int width;
-    private int height;
-    private String name;
+    private JFrame frame;
     private Canvas canvas;
     private BufferStrategy bufferStrategy;
     private Graphics graphics;
 
 
-    public Window(int width, int height, String name) {
+    public Window(int width, int height, String title) {
         this.input = new Input();
-        this.width = width;
-        this.height = height;
-        this.name = name;
-        pic();
-    }
 
-    public void pic() {
+        this.canvas = new Canvas();
+        this.canvas.setMaximumSize(new Dimension(width, height));
+        this.canvas.setMinimumSize(new Dimension(width, height));
+        this.canvas.setPreferredSize(new Dimension(width, height));
 
-        canvas = new Canvas();
-        canvas.setMaximumSize(new Dimension(width, height));
-        canvas.setMinimumSize(new Dimension(width, height));
-        canvas.setPreferredSize(new Dimension(width, height));
-
-        JR = new JFrame(name);
-        JR.setSize(width, height);
-        JR.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JR.setVisible(true);
-        JR.setLocationRelativeTo(null);
-        JR.setResizable(false);
-
-        JR.add(canvas);
-        JR.pack();
+        this.frame = new JFrame(title);
+        this.frame.setSize(width, height);
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setVisible(true);
+        this.frame.setLocationRelativeTo(null);
+        this.frame.setResizable(false);
+        this.frame.add(canvas);
+        this.frame.pack();
     }
 
     public void clear() {
-        graphics.clearRect(0, 0, width, height);
+        graphics.clearRect(0, 0, frame.getWidth(), frame.getHeight());
     }
 
     public void draw(List<GameObject> objects) {
@@ -56,11 +45,14 @@ public class Window {
         }
         graphics = bufferStrategy.getDrawGraphics();              //Draws things to the canvas(paintbrush)
 
-        for (GameObject obj : objects) {
-            graphics.drawImage(obj.GetImage().getData(), (int) obj.getFrame().getX(), (int) object.getFrame().getY(), null);
+        for (GameObject obj: objects) {
+            graphics.drawImage(obj.getImage().getData(), (int)obj.getFrame().getX(), (int)object.getFrame().getY(), null);
         }
         bufferStrategy.show();
         graphics.dispose();
     }
 
+    public Input getInput() {
+        return input;
+    }
 }
