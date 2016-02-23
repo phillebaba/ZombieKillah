@@ -6,7 +6,7 @@ import javax.swing.*;
 /**
  * Created by Philip Laine on 20/02/16.
  */
-public class Character extends MovableObject {
+public abstract class Character extends MovableObject {
     protected float health;
     /*
     protected hashMap<weapon> weapons;

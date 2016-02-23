@@ -4,7 +4,7 @@ package com.chalmers.ZombieKillah;
 /**
  * Created by Philip Laine on 20/02/16.
  */
-public class MovableObject extends GameObject {
+public abstract class MovableObject extends GameObject {
     protected float speed;
 
     public MovableObject (String path, int x, int y) {

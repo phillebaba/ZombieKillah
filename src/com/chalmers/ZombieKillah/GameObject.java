@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Created by Philip Laine on 20/02/16.
  */
-public class GameObject {
+public abstract class GameObject {
     protected BufferedImage image;
     protected Rectangle2D.Double frame;
     protected Direction direction;
