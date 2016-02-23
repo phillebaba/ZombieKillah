@@ -3,6 +3,7 @@ package com.chalmers.ZombieKillah;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
 /**
  * Created by Jesper Rask on 2016-02-19.
@@ -12,8 +13,6 @@ public class Window {
     private JFrame frame;
     private Canvas canvas;
     private BufferStrategy bufferStrategy;
-    private Graphics graphics;
-
 
     public Window(int width, int height, String title) {
         this.input = new Input();
@@ -34,22 +33,22 @@ public class Window {
     }
 
     public void clear() {
-        graphics.clearRect(0, 0, frame.getWidth(), frame.getHeight());
+        canvas.getGraphics().clearRect(0, 0, frame.getWidth(), frame.getHeight());
     }
 
-    public void draw(List<GameObject> objects) {
+    public void draw(ArrayList<GameObject> objects) {
         bufferStrategy = canvas.getBufferStrategy();
         if (bufferStrategy == null) {
-            bufferStrategy = canvas.createBufferStrategy(2);
+            canvas.createBufferStrategy(2);
+            bufferStrategy = canvas.getBufferStrategy();
             return;
         }
-        graphics = bufferStrategy.getDrawGraphics();              //Draws things to the canvas(paintbrush)
 
-        for (GameObject obj: objects) {
-            graphics.drawImage(obj.getImage().getData(), (int)obj.getFrame().getX(), (int)object.getFrame().getY(), null);
+        for (GameObject object: objects) {
+            canvas.getGraphics().drawImage(object.getImage(), (int)object.getFrame().getX(), (int)object.getFrame().getY(), null);
         }
         bufferStrategy.show();
-        graphics.dispose();
+        canvas.getGraphics().dispose();
     }
 
     public Input getInput() {

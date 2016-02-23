@@ -90,24 +90,4 @@ public class Controller implements Runnable {
     public void logFrameRate(int frameRate) {
         System.out.println(frameRate);
     }
-
-    public Window getWindow() {
-        return window;
-    }
-
-    public double getScale() {
-        return scale;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
 }

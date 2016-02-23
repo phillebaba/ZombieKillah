@@ -1,7 +1,6 @@
 package com.chalmers.ZombieKillah;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -9,7 +8,7 @@ import java.util.Set;
  */
 public abstract class Game {
     protected Player player;
-    protected List<GameObject> objects;
+    protected ArrayList<GameObject> objects;
 
     protected abstract void update(Set<Integer> pressedKeys);
     protected abstract void objectsDidCollide(GameObject object1, GameObject object2);
@@ -23,7 +22,7 @@ public abstract class Game {
 
     }
 
-    public List<GameObject> getObjects() {
+    public ArrayList<GameObject> getObjects() {
         return objects;
     }
 }
