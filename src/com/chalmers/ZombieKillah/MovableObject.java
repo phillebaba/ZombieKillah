@@ -1,7 +1,5 @@
 package com.chalmers.ZombieKillah;
 
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by Philip Laine on 20/02/16.
@@ -9,16 +7,12 @@ import java.awt.*;
 public class MovableObject extends GameObject {
     protected float speed;
 
-    public MovableObject (Direction direction, int position, boolean collideable, Image image, float speed){
-            super(direction, position, collideable, image);
-            this.speed = speed;
+    public MovableObject (String path, int x, int y) {
+        super(path, x, y);
+        this.speed = 100;
     }
 
-
     protected void step(){
-
-
-
 
     }
 }
