@@ -67,7 +67,8 @@ public class Controller implements Runnable {
             }
 
             if (render) {
-                // Clear and draw window
+                window.clear();
+                window.draw(game.getObjects());
                 frameCount++;
             } else {
                 try {

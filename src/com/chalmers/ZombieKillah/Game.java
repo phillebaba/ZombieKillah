@@ -22,4 +22,8 @@ public abstract class Game {
     public void checkCollisions() {
 
     }
+
+    public List<GameObject> getObjects() {
+        return objects;
+    }
 }
