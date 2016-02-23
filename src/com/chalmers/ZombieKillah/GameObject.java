@@ -1,22 +1,37 @@
 package com.chalmers.ZombieKillah;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by Philip Laine on 20/02/16.
  */
 public class GameObject {
-    private BufferedImage image;
+    protected Direction direction;
+    protected int position;
+    protected boolean collideable;
+    protected Image image;
 
-    public GameObject(String path) {
-        try {
-            image = ImageIO.read(new File(path));
-        } catch(IOException e){
-            e.printStackTrace();
-            System.exit(1);
-        }
+
+     public GameObject(Direction direction, int position, boolean collideable, Image image){
+
+        this.direction = direction;
+        this.position = position;
+        this.collideable = collideable;
+        this.image = image;
+
     }
+
+    enum Direction
+    {
+        EAST,
+        WEST,
+        NORTH,
+        NORTHWEST,
+        NORTHEAST,
+        SOUTH,
+        SOUTHWEST,
+        SOUTHEAST
+    }
+
 }
