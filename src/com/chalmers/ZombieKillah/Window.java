@@ -11,13 +11,12 @@ import java.io.IOException;
 
 
 public class Window {
-<<<<<<< Updated upstream
+
     private Input input;
     private JFrame JR;
-=======
+
 
     private JFrame frame;
->>>>>>> Stashed changes
     private int width;
     private int height;
     private String name;
@@ -80,11 +79,8 @@ public class Window {
         }
 
     }
-<<<<<<< Updated upstream
 
     public Input getInput() {
         return input;
     }
 }
-=======
->>>>>>> Stashed changes
