@@ -1,7 +1,9 @@
 package com.chalmers.ZombieKillah;
 
+import java.util.Set;
+
 /**
- * Created by Philip on 19/02/16.
+ * Created by Philip Laine on 19/02/16.
  */
 public class Controller implements Runnable {
     private Game game;
@@ -17,7 +19,7 @@ public class Controller implements Runnable {
 
     public Controller(Game game) {
         this.game = game;
-        this.window = new Window(width, height, title);
+        this.window = new Window((int)(width * scale), (int)(height * scale), title);
     }
 
     // Game engine states
@@ -38,7 +40,7 @@ public class Controller implements Runnable {
         double passedTime  = 0;
         double unprocessedTime = 0;
         double frameTime = 0;
-        int frames = 0;
+        int frameCount = 0;
 
         while (isRunning) {
             boolean render = false;
@@ -51,22 +53,22 @@ public class Controller implements Runnable {
             frameTime += passedTime;
 
             while (unprocessedTime >= frameCap) {
-                // Update game logic
-                // Check collisions
+                game.update(window.getInput().getKeys());
+                game.checkCollisions();
 
                 unprocessedTime -= frameCap;
                 render = true;
 
                 if (frameTime >= 1) {
-                    logFrameRate(frames);
+                    logFrameRate(frameCount);
                     frameTime = 0;
-                    frames = 0;
+                    frameCount = 0;
                 }
             }
 
             if (render) {
                 // Clear and draw window
-                frames++;
+                frameCount++;
             } else {
                 try {
                     Thread.sleep(1);
@@ -87,8 +89,6 @@ public class Controller implements Runnable {
     public void logFrameRate(int frameRate) {
         System.out.println(frameRate);
     }
-
-    // Getters
 
     public Window getWindow() {
         return window;

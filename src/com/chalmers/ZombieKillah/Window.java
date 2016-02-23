@@ -8,7 +8,7 @@ import java.awt.image.BufferStrategy;
  * Created by Jesper Rask on 2016-02-19.
  */
 public class Window {
-
+    private Input input;
     private JFrame JR;
     private int width;
     private int height;
@@ -19,6 +19,7 @@ public class Window {
 
 
     public Window(int width, int height, String name) {
+        this.input = new Input();
         this.width = width;
         this.height = height;
         this.name = name;
@@ -43,28 +44,23 @@ public class Window {
         JR.pack();
     }
 
-    public void clear(){
-        graphics.clearRect(0,0, width, height);
+    public void clear() {
+        graphics.clearRect(0, 0, width, height);
     }
 
-    public void draw(List <GameObject> objects) {
+    public void draw(List<GameObject> objects) {
         bufferStrategy = canvas.getBufferStrategy();
-        if(bufferStrategy == null){
+        if (bufferStrategy == null) {
             bufferStrategy = canvas.createBufferStrategy(2);
             return;
         }
         graphics = bufferStrategy.getDrawGraphics();              //Draws things to the canvas(paintbrush)
 
-        for(GameObject obj : objects){
-            graphics.drawImage(obj.GetImage().getData(), (int)obj.getFrame().getX(), (int)object.getFrame().getY(), null);
+        for (GameObject obj : objects) {
+            graphics.drawImage(obj.GetImage().getData(), (int) obj.getFrame().getX(), (int) object.getFrame().getY(), null);
         }
         bufferStrategy.show();
         graphics.dispose();
     }
-
-
-
-
-
 
 }
