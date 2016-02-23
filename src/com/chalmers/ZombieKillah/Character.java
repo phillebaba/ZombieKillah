@@ -16,8 +16,8 @@ public abstract class Character extends MovableObject {
 
     */
 
-    public Character(String path, int x, int y)/*,Weapon currentWeapon)*/{
-        super(path, x, y);
+    public Character(String path, int posX, int posY, float speed)/*,Weapon currentWeapon)*/{
+        super(path, posX, posY, speed);
         this.health = 100;
     }
 
@@ -28,6 +28,5 @@ public abstract class Character extends MovableObject {
     */
 
     public void changeWeapon(int weaponPosition){
-
     }
 }
