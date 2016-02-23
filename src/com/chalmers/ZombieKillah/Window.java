@@ -55,30 +55,18 @@ public class Window {
 
         bs = canvas.getBufferStrategy();
         if(bs == null){
-            canvas.createBufferStrategy(3);
+           bs = canvas.createBufferStrategy(2);
             return;
         }
         g = bs.getDrawGraphics();
-        //draw-code here
-
-
+        for(GameObject object : objects) {
+             g.drawImage(object.GetImage().getData(), object.getFrame().getX(), object.getFrame().getY, null);
+        }
         //end drawing
         bs.show();
         g.dispose();
     }
 
-    public static BufferedImage imageLoader(String path){
-        try {
-            return ImageIO.read(ImageLoader.class.getResource(path));
-        }
-        catch(IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        return null;
-        }
-
-    }
 
     public Input getInput() {
         return input;
