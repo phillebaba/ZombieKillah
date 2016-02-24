@@ -1,5 +1,6 @@
 package com.chalmers.ZombieKillah;
 
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,7 +8,7 @@ import java.util.Set;
 /**
  * Created by Philip Laine on 20/02/16.
  */
-public class Input {
+public class Input extends KeyAdapter {
     private Set<Integer> keys;
 
     public Input() {

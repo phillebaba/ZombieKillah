@@ -15,8 +15,6 @@ public class Window {
     private BufferStrategy bufferStrategy;
 
     public Window(int width, int height, String title) {
-        this.input = new Input();
-
         this.canvas = new Canvas();
         this.canvas.setMaximumSize(new Dimension(width, height));
         this.canvas.setMinimumSize(new Dimension(width, height));
@@ -31,8 +29,10 @@ public class Window {
         this.frame.add(canvas);
         this.frame.pack();
 
-        // Create buffer strategy, must be called after setting frame
-        this.canvas.createBufferStrategy(2);
+        this.input = new Input();
+        this.frame.addKeyListener(this.input); // Set frame key listener
+
+        this.canvas.createBufferStrategy(2); // Create buffer strategy, must be called after setting frame
         this.bufferStrategy = canvas.getBufferStrategy();
     }
 
