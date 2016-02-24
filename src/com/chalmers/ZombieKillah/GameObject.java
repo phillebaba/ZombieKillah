@@ -35,7 +35,7 @@ public abstract class GameObject {
              this.image = ImageIO.read(new File(path + ".png"));
          } catch(IOException e){
              e.printStackTrace();
-             System.exit(1);
+             //System.exit(1);
          }
 
          this.frame = new Rectangle2D.Double(x, y, image.getWidth(), image.getHeight());
