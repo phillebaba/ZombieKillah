@@ -52,6 +52,6 @@ public abstract class MovableObject extends GameObject {
     }
 
     private void changeFramePosition(double x, double y) {
-        frame.setRect(frame.getX() + x, frame.getY() - y, frame.getWidth(), frame.getHeight());
+        frame.setRect(frame.getX() + x, frame.getY() + y, frame.getWidth(), frame.getHeight());
     }
 }
