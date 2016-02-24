@@ -7,9 +7,18 @@ public class Weapond extends GameObject {
 
     private int damage;
 
-    public Weapond (String path, int posX, int posY){
-        super(path, posX, posY);
+    public Weapond (String path, int posX, int posY, boolean isVisable){
+        super(path, posX, posY, isVisable);
         this.collidable = false;
         this.damage = 50;
+        this.isVisable = false;
+    }
+
+    public void equipWeapond(){
+        this.isVisable = true;
+    }
+
+    public void unEquipdWeapond(){
+        this.isVisable = false;
     }
 }

@@ -16,9 +16,10 @@ public abstract class Character extends MovableObject {
 
     */
 
-    public Character(String path, int posX, int posY, float speed)/*,Weapon currentWeapon)*/{
-        super(path, posX, posY, speed);
+    public Character(String path, int posX, int posY, float speed, boolean isVisable)/*,Weapon currentWeapon)*/{
+        super(path, posX, posY, speed, isVisable);
         this.health = 100;
+        this.isVisable = true;
     }
 
     /*
