@@ -32,7 +32,7 @@ public abstract class GameObject {
          this.visible = true;
 
          try {
-             this.image = ImageIO.read(new File(path));
+             this.image = ImageIO.read(new File(path + ".png"));
          } catch(IOException e){
              e.printStackTrace();
              System.exit(1);

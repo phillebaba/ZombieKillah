@@ -12,8 +12,8 @@ public abstract class Character extends MovableObject {
     protected Weapon currentWeapon;
     protected ArrayList<Weapon> weapons;
 
-    public Character(String path, int posX, int posY){
-        super(path, posX, posY);
+    public Character(String path, double x, double y){
+        super(path, x, y);
         this.health = 100;
         this.weapons = new ArrayList<Weapon>();
     }
