@@ -1,6 +1,7 @@
 package com.chalmers.ZombieKillah;
 
 import java.awt.*;
+import java.util.*;
 import javax.swing.*;
 
 /**
@@ -8,26 +9,25 @@ import javax.swing.*;
  */
 public abstract class Character extends MovableObject {
     protected float health;
-    /*
-    protected hashMap<weapon> weapons;
     protected Weapon currentWeapon;
+    protected ArrayList<Weapon> weapons;
 
-    weaponHashmap = new hashMap<weapn> weapns;
-
-    */
-
-    public Character(String path, int posX, int posY, float speed, boolean isVisable)/*,Weapon currentWeapon)*/{
-        super(path, posX, posY, speed, isVisable);
+    public Character(String path, int posX, int posY){
+        super(path, posX, posY);
         this.health = 100;
         this.isVisable = true;
+        this.weapons = new ArrayList<Weapon>();s
     }
 
-    /*
     public void takeDamage(Weapon weapon){
-        this.health = this.health - weapon.damage;
+        this.health -= weapon.getDamage();
     }
-    */
 
     public void changeWeapon(int weaponPosition){
+        if(!(weaponPosition > weapons.size())){
+            currentWeapon.unEquipWeapon();
+            currentWeapon = weapons.get(weaponPosition);
+            currentWeapon.equipWeapon();
+        }
     }
 }
