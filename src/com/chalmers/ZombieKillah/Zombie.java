@@ -7,12 +7,12 @@ import java.awt.geom.Rectangle2D;
  */
 public class Zombie extends Character {
 
-    public Zombie(int x, int y){
+    public Zombie(double x, double y){
         super("Zombie", x, y);
+        this.speed = 0.2;
     }
 
     public void move(Rectangle2D.Double destination){
-
         double angle = Math.toDegrees(Math.atan2(destination.getX() - frame.getX(), destination.getY() - frame.getY()));
         angle = angle + Math.ceil( -angle / 360 ) * 360;
         if(angle >= 337.5 && angle < 22.5) {
