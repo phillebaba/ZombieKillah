@@ -5,47 +5,61 @@ package com.chalmers.ZombieKillah;
  * Created by Philip Laine on 20/02/16.
  */
 public abstract class MovableObject extends GameObject {
-    protected float speed;
+    protected double speed;
 
     public MovableObject (String path, int posX, int posY, float speed, boolean isVisable) {
         super(path, posX, posY,isVisable);
         this.speed = speed;
     }
 
-    protected void step(GameObject gameObject){
+    private void setPosY(int newPosY) {
+        this.posY += newPosY;
+    }
 
-        switch(gameObject.getDirection()){
+    private void setPosX(int newPosX) {
+        this.posX += newPosX;
+    }
+
+    protected void step(){
+        switch(direction){
             case NORTH:
-                gameObject.setPosY(-(int)speed);
+                changeFramePosition(0, -speed);
                 break;
+
             case NORTHEAST:
-                gameObject.setPosY(-(int)speed);
-                gameObject.setPosX((int)speed);
+                changeFramePosition(speed, -speed);
                 break;
+
             case NORTHWEST:
-                gameObject.setPosX(-(int)speed);
-                gameObject.setPosY(-(int)speed);
+                changeFramePosition(-speed, -speed);
                 break;
+
             case SOUTH:
-                gameObject.setPosY((int)speed);
+                changeFramePosition(0, speed);
                 break;
+
             case SOUTHEAST:
-                gameObject.setPosY((int)speed);
-                gameObject.setPosX((int)speed);
+                changeFramePosition(speed, speed);
                 break;
+
             case SOUTHWEST:
-                gameObject.setPosX((int)speed);
-                gameObject.setPosY(-(int)speed);
+                changeFramePosition(-speed, speed);
                 break;
+
             case EAST:
-                gameObject.setPosX((int)speed);
+                changeFramePosition(speed, 0);
                 break;
+
             case WEST:
-                gameObject.setPosX(-(int)speed);
+                changeFramePosition(-speed, 0);
                 break;
+
             default:
                 break;
         }
+    }
 
+    private void changeFramePosition(double x, double y) {
+        frame.setRect(frame.getX() + x, frame.getY() - y, frame.getWidth(), frame.getHeight());
     }
 }

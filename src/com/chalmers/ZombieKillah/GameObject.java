@@ -56,10 +56,6 @@ public abstract class GameObject {
         return direction;
     }
 
-    public void setPosY(int newPosY) { this.posY += newPosY;}
-
-    public void setPosX(int newPosX) {this.posX += newPosX;}
-
     public boolean isCollidable() {
         return collidable;
     }
