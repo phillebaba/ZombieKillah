@@ -15,8 +15,7 @@ public abstract class Character extends MovableObject {
     public Character(String path, int posX, int posY){
         super(path, posX, posY);
         this.health = 100;
-        this.isVisable = true;
-        this.weapons = new ArrayList<Weapon>();s
+        this.weapons = new ArrayList<Weapon>();
     }
 
     public void takeDamage(Weapon weapon){

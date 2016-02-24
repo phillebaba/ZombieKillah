@@ -13,8 +13,7 @@ public abstract class GameObject {
     protected BufferedImage image;
     protected Rectangle2D.Double frame;
     protected Direction direction;
-    protected boolean collidable, isVisable;
-    protected int posX, posY;
+    protected boolean collidable, visible;
 
     enum Direction {
         EAST,
@@ -27,12 +26,10 @@ public abstract class GameObject {
         SOUTHEAST
     }
 
-     public GameObject(String path, int posX, int posY, boolean isVisable) {
+     public GameObject(String path, double x, double y) {
          this.direction = Direction.NORTH;
          this.collidable = true;
-         this.posX = posX;
-         this.posY = posY;
-         this.isVisable = isVisable;
+         this.visible = true;
 
          try {
              this.image = ImageIO.read(new File(path));
@@ -41,7 +38,7 @@ public abstract class GameObject {
              System.exit(1);
          }
 
-         this.frame = new Rectangle2D.Double(posX, posY, image.getWidth(), image.getHeight());
+         this.frame = new Rectangle2D.Double(x, y, image.getWidth(), image.getHeight());
      }
 
     public BufferedImage getImage() {
@@ -58,5 +55,9 @@ public abstract class GameObject {
 
     public boolean isCollidable() {
         return collidable;
+    }
+
+    public boolean isVisible() {
+        return visible;
     }
 }
