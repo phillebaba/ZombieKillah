@@ -12,8 +12,8 @@ public class ZombieKillah extends Game {
         super();
 
         for (int i = 0; i < 10; i++) {
-            //Zombie zombie = new Zombie((double)(10+(i*10)), (double)(i*25+30));
-
+            Zombie zombie = new Zombie((double)(10+(i*10)), (double)(i*25+30));
+            objects.add(zombie);
         }
     }
 
@@ -48,6 +48,12 @@ public class ZombieKillah extends Game {
         }
 
         // AI path calculations
+
+        for (GameObject object: objects) {
+            if (object instanceof Zombie) {
+                ((Zombie) object).move(player.frame);
+            }
+        }
 
     }
 
