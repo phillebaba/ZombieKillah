@@ -7,8 +7,8 @@ package com.chalmers.ZombieKillah;
 public abstract class MovableObject extends GameObject {
     protected float speed;
 
-    public MovableObject (String path, int posX, int posY, float speed) {
-        super(path, posX, posY);
+    public MovableObject (String path, int posX, int posY, float speed, boolean isVisable) {
+        super(path, posX, posY,isVisable);
         this.speed = speed;
     }
 
