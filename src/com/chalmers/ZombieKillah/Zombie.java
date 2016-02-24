@@ -17,7 +17,6 @@ public class Zombie extends Character {
         angle = angle + Math.ceil( -angle / 360 ) * 360;
         angle += 22.5;
 
-        System.out.println(angle);
         if(angle >= 0 && angle < 45) {
            direction = Direction.SOUTH;
         } else if(angle >= 45 && angle < 90) {
@@ -38,4 +37,5 @@ public class Zombie extends Character {
         
         super.step();
     }
+
 }
