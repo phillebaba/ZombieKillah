@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class Wall extends GameObject {
 
-    public Wall (String path, double x, double y){
+    public Wall (double x, double y){
         super("Wall",x,y);
     }
 
