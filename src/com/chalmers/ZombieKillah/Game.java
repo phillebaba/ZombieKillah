@@ -16,6 +16,8 @@ public abstract class Game {
     public Game() {
         this.player = new Player(10, 10);
         this.objects = new ArrayList<GameObject>();
+
+        this.objects.add(player);
     }
 
     public void checkCollisions() {

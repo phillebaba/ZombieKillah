@@ -30,25 +30,25 @@ public class Window {
         this.frame.setResizable(false);
         this.frame.add(canvas);
         this.frame.pack();
+
+        // Create buffer strategy, must be called after setting frame
+        this.canvas.createBufferStrategy(2);
+        this.bufferStrategy = canvas.getBufferStrategy();
     }
 
     public void clear() {
-        canvas.getGraphics().clearRect(0, 0, frame.getWidth(), frame.getHeight());
+        bufferStrategy.getDrawGraphics().clearRect(0, 0, frame.getWidth(), frame.getHeight());
     }
 
     public void draw(ArrayList<GameObject> objects) {
-        bufferStrategy = canvas.getBufferStrategy();
-        if (bufferStrategy == null) {
-            canvas.createBufferStrategy(2);
-            bufferStrategy = canvas.getBufferStrategy();
-            return;
-        }
+        Graphics graphics = bufferStrategy.getDrawGraphics();
 
         for (GameObject object: objects) {
-            canvas.getGraphics().drawImage(object.getImage(), (int)object.getFrame().getX(), (int)object.getFrame().getY(), null);
+            graphics.drawImage(object.getImage(), (int)object.getFrame().getX(), (int)object.getFrame().getY(), null);
         }
+
         bufferStrategy.show();
-        canvas.getGraphics().dispose();
+        graphics.dispose();
     }
 
     public Input getInput() {
