@@ -7,10 +7,14 @@ public class Player extends Character {
 
     public Player(double x, double y) {
         super("Player", x, y);
+        this.speed = 2;
     }
 
     public void turn(Direction direction) {
-        this.direction = direction;
-        super.step();
+        if (this.direction == direction) {
+            super.step();
+        } else {
+            this.direction = direction;
+        }
     }
 }
