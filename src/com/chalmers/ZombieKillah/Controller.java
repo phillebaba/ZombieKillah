@@ -1,7 +1,5 @@
 package com.chalmers.ZombieKillah;
 
-import java.util.Set;
-
 /**
  * Created by Philip Laine on 19/02/16.
  */
@@ -10,19 +8,18 @@ public class Controller implements Runnable {
     private Window window;
     private Thread thread;
 
-    private String title = "Zombie Killah";
-    private int width = 320, height = 240;
-    private double scale = 2.0;
-
     private boolean isRunning = false;
     private double frameCap = 1.0 / 60.0;
+
+    private final String title = "Zombie Killah";
+    private final int width = 320, height = 240;
+    private final double scale = 2.0;
 
     public Controller(Game game) {
         this.game = game;
         this.window = new Window((int)(width * scale), (int)(height * scale), title);
     }
 
-    // Game engine states
 
     public void start() {
         if (isRunning)
