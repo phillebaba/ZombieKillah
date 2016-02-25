@@ -1,6 +1,8 @@
 package com.chalmers.ZombieKillah;
 
 
+import java.awt.geom.Rectangle2D;
+
 /**
  * Created by Philip Laine on 20/02/16.
  */
@@ -10,6 +12,24 @@ public abstract class MovableObject extends GameObject {
     public MovableObject (String path, double x, double y) {
         super(path, x, y);
         this.speed = 1;
+    }
+
+    public void avoidCollision(GameObject object) {
+        Rectangle2D.Double coveredFrame = (Rectangle2D.Double)frame.createIntersection(object.frame);
+
+        if (coveredFrame.getWidth() > coveredFrame.getHeight()) {
+            if (frame.getY() == coveredFrame.getY()) { // Bottom
+                changeFramePosition(0, coveredFrame.getHeight());
+            } else { // Top
+                changeFramePosition(0, -coveredFrame.getHeight());
+            }
+        } else {
+            if (frame.getX() == coveredFrame.getX()) { // Right
+                changeFramePosition(coveredFrame.getWidth(), 0);
+            } else { // Left
+                changeFramePosition(-coveredFrame.getWidth(), 0);
+            }
+        }
     }
 
     protected void step(){

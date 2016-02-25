@@ -21,20 +21,34 @@ public abstract class Game {
     }
 
     public void checkCollisions() {
+        int index = 1;
+
         for (GameObject object1: objects) {
             if (object1.collidable) {
-                for (GameObject object2 : objects) {
-                    if (object2.collidable && object1.frame.intersects(object2.getFrame())) {
-                        System.out.println("collision");
+                for (GameObject object2 : objects.subList(index, objects.size())) {
+                    if (object2.collidable && object1.frame.intersects(object2.frame)) {
+                        if (object1 instanceof MovableObject) {
+                            ((MovableObject)object1).avoidCollision(object2);
+                        } else if (object2 instanceof MovableObject) {
+                            ((MovableObject)object2).avoidCollision(object1);
+                        }
                     }
                 }
             }
+
+            index++;
         }
+    }
+
+    public void addObject(GameObject object) {
+
+    }
+
+    public void removeObject(GameObject object) {
+
     }
 
     public ArrayList<GameObject> getObjects() {
         return objects;
     }
-
-
 }
