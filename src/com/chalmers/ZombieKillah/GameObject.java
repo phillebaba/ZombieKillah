@@ -14,6 +14,8 @@ public abstract class GameObject {
     protected Rectangle2D.Double frame;
     protected Direction direction;
     protected boolean collidable, visible;
+    protected float health;
+    protected boolean indestructable;
 
     enum Direction {
         EAST,
@@ -26,20 +28,32 @@ public abstract class GameObject {
         SOUTHEAST
     }
 
-     public GameObject(String path, double x, double y) {
-         this.direction = Direction.NORTH;
-         this.collidable = true;
-         this.visible = true;
+    public GameObject(String path, double x, double y) {
+        this.direction = Direction.NORTH;
+        this.collidable = true;
+        this.visible = true;
 
-         try {
-             this.image = ImageIO.read(new File(path + ".png"));
-         } catch(IOException e){
-             e.printStackTrace();
-             System.exit(1);
-         }
+        try {
+            this.image = ImageIO.read(new File(path + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
 
-         this.frame = new Rectangle2D.Double(x, y, image.getWidth(), image.getHeight());
-     }
+        this.frame = new Rectangle2D.Double(x, y, image.getWidth(), image.getHeight());
+    }
+
+    public float takeDamage(float damage) {
+        if (this.getIndestrutable()) {
+            return 0;
+        } else {
+            if ( (this.health-damage)>0 ){
+                this.health -= damage;
+                return this.health;
+            }
+        }
+        return 0;
+    }
 
     public BufferedImage getImage() {
         return image;
@@ -59,5 +73,9 @@ public abstract class GameObject {
 
     public boolean isVisible() {
         return visible;
+    }
+
+    public boolean getIndestrutable() {
+        return indestructable;
     }
 }

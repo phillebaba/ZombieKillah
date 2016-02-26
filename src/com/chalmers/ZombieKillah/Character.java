@@ -8,7 +8,6 @@ import javax.swing.*;
  * Created by Philip Laine on 20/02/16.
  */
 public abstract class Character extends MovableObject {
-    protected float health;
     protected Weapon currentWeapon;
     protected ArrayList<Weapon> weapons;
 
@@ -29,4 +28,5 @@ public abstract class Character extends MovableObject {
             currentWeapon.equipWeapon();
         }
     }
+
 }
