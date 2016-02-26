@@ -2,28 +2,28 @@ package com.chalmers.ZombieKillah;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
 
 /**
  * Created by Philip Laine on 20/02/16.
  */
 public class Input extends KeyAdapter {
-    private Set<Integer> keys;
+    private HashMap<Integer, Boolean> keys;
 
     public Input() {
-        keys = new HashSet<Integer>();
+        this.keys = new DefaultHashMap<>(false);
     }
 
     public void keyPressed(KeyEvent evt) {
-        keys.add(evt.getKeyCode());
+        keys.put(evt.getKeyCode(), true);
     }
 
     public void keyReleased(KeyEvent evt) {
-        keys.remove(evt.getKeyCode());
+        keys.put(evt.getKeyCode(), false);
     }
 
-    public Set<Integer> getKeys() {
+    public HashMap<Integer, Boolean> getKeys() {
         return keys;
     }
 }
+

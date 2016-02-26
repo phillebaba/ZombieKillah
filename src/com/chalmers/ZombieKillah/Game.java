@@ -1,6 +1,8 @@
 package com.chalmers.ZombieKillah;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 
 /**
@@ -10,7 +12,7 @@ public abstract class Game {
     protected Player player;
     protected ArrayList<GameObject> objects;
 
-    protected abstract void update(Set<Integer> pressedKeys);
+    protected abstract void update(HashMap<Integer, Boolean> keys);
     protected abstract void objectsDidCollide(GameObject object1, GameObject object2);
 
     public Game() {
