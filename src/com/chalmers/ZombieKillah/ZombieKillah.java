@@ -1,6 +1,7 @@
 package com.chalmers.ZombieKillah;
 
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
 import java.util.Set;
 
 /**
@@ -22,42 +23,27 @@ public class ZombieKillah extends Game {
         objects.add(bullet);
     }
 
-    protected void update(Set<Integer> pressedKeys) {
-        for (Integer key: pressedKeys) {
-            switch (key) {
-                case KeyEvent.VK_LEFT:
-                    player.turn(GameObject.Direction.WEST);
-                    break;
+    protected void update(HashMap<Integer, Boolean> keys) {
+        if (keys.get(KeyEvent.VK_UP) && keys.get(KeyEvent.VK_LEFT)) {
+            player.turn(GameObject.Direction.NORTHWEST);
+        } else if (keys.get(KeyEvent.VK_UP) && keys.get(KeyEvent.VK_RIGHT)) {
+            player.turn(GameObject.Direction.NORTHEAST);
+        } else if (keys.get(KeyEvent.VK_DOWN) && keys.get(KeyEvent.VK_LEFT)) {
+            player.turn(GameObject.Direction.SOUTHWEST);
+        } else if (keys.get(KeyEvent.VK_DOWN) && keys.get(KeyEvent.VK_RIGHT)) {
+            player.turn(GameObject.Direction.SOUTHEAST);
+        } else if (keys.get(KeyEvent.VK_UP)) {
+            player.turn(GameObject.Direction.NORTH);
+        } else if (keys.get(KeyEvent.VK_DOWN)) {
+            player.turn(GameObject.Direction.SOUTH);
+        } else if (keys.get(KeyEvent.VK_LEFT)) {
+            player.turn(GameObject.Direction.WEST);
+        } else if (keys.get(KeyEvent.VK_RIGHT)) {
+            player.turn(GameObject.Direction.EAST);
+        }
 
-                case KeyEvent.VK_DOWN:
-                    player.turn(GameObject.Direction.SOUTH);
-                    break;
-
-                case KeyEvent.VK_UP:
-                    player.turn(GameObject.Direction.NORTH);
-                    break;
-
-                case KeyEvent.VK_RIGHT:
-                    player.turn(GameObject.Direction.EAST);
-                    break;
-
-                case KeyEvent.VK_SPACE:
-                    shoot();
-                    break;
-
-                /*case KeyEvent.VK_RIGHT | KeyEvent.VK_UP:
-                    player.turn(GameObject.Direction.NORTHEAST);
-                    break;
-                case KeyEvent.VK_LEFT | KeyEvent.VK_UP:
-                    player.turn(GameObject.Direction.NORTHWEST);
-                    break;
-                case KeyEvent.VK_RIGHT | KeyEvent.VK_DOWN:
-                    player.turn(GameObject.Direction.SOUTHEAST);
-                    break;
-                case KeyEvent.VK_LEFT | KeyEvent.VK_DOWN:
-                    player.turn(GameObject.Direction.SOUTHWEST);
-                    break;*/
-            }
+        if (keys.get(KeyEvent.VK_SPACE)) {
+            shoot();
         }
 
         // AI path calculations
