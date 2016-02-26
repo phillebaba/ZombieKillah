@@ -44,13 +44,9 @@ public abstract class GameObject {
     }
 
     public float takeDamage(float damage) {
-        if (this.getIndestrutable()) {
-            return 0;
-        } else {
-            if ( (this.health-damage)>0 ){
-                this.health -= damage;
-                return this.health;
-            }
+        if ((!this.getIndestrutable()) && (this.health - damage) > 0){
+            this.health -= damage;
+            return this.health;
         }
         return 0;
     }
