@@ -50,7 +50,7 @@ public class Controller implements Runnable {
             frameTime += passedTime;
 
             while (unprocessedTime >= frameCap) {
-                game.update(window.getInput().getKeys());
+                game.update();
                 game.checkCollisions();
 
                 unprocessedTime -= frameCap;

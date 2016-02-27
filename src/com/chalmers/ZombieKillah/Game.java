@@ -1,18 +1,17 @@
 package com.chalmers.ZombieKillah;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 /**
  * Created by Philip Laine on 19/02/16.
  */
 public abstract class Game {
+    private Map map;
     protected Player player;
     protected ArrayList<GameObject> objects;
 
-    protected abstract void update(HashMap<Integer, Boolean> keys);
+    protected abstract void update();
     protected abstract void objectsDidCollide(GameObject object1, GameObject object2);
 
     public Game() {

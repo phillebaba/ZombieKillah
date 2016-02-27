@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * Created by Jesper Rask on 2016-02-19.
  */
 public class Window {
-    private Input input;
     private JFrame frame;
     private Canvas canvas;
     private BufferStrategy bufferStrategy;
@@ -29,8 +28,7 @@ public class Window {
         this.frame.add(canvas);
         this.frame.pack();
 
-        this.input = new Input();
-        this.frame.addKeyListener(this.input); // Set frame key listener
+        this.frame.addKeyListener(Input.getInstance()); // Set frame key listener
 
         this.canvas.createBufferStrategy(2); // Create buffer strategy, must be called after setting frame
         this.bufferStrategy = canvas.getBufferStrategy();
@@ -49,9 +47,5 @@ public class Window {
 
         bufferStrategy.show();
         graphics.dispose();
-    }
-
-    public Input getInput() {
-        return input;
     }
 }
