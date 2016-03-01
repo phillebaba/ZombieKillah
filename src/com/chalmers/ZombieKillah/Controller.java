@@ -6,17 +6,14 @@ package com.chalmers.ZombieKillah;
 public class Controller implements Runnable {
     private Game game;
     private Window window;
+
     private Thread thread;
-
-    private static final String title = "Zombie Killah";
-    private static final int scale = 20;
-
     private boolean isRunning = false;
     private double frameCap = 1.0 / 60.0;
 
     public Controller(Game game) {
         this.game = game;
-        this.window = new Window(scale*game.map.getWidth(), scale*game.map.getHeight(), title);
+        this.window = new Window(game.getHeight(), game.getWidth(), game.getTitle());
     }
 
     public void start() {
