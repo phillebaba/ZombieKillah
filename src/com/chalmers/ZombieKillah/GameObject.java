@@ -1,7 +1,6 @@
 package com.chalmers.ZombieKillah;
 
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by Philip Laine on 20/02/16.

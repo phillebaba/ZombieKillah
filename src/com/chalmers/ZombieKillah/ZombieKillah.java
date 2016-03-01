@@ -8,11 +8,17 @@ import java.util.HashMap;
  * Created by Philip Laine on 19/02/16.
  */
 public class ZombieKillah extends Game {
-    public ZombieKillah() {
-        super(new Map("Map"));
+    protected Player player;
 
-        this.map.registerColorForClass(new Color(0x454242), Wall.class);
-        this.objects.addAll(map.getObjects());
+    public ZombieKillah() {
+        super(20, 32, 32, "Zombie Killah");
+
+        this.player = new Player(20, 100);
+        this.objects.add(player);
+
+        Map map = new Map("Map");
+        map.registerColorForClass(new Color(0x454242), Wall.class);
+        objects.addAll(map.getObjects());
 
         for (int i = 0; i < 10; i++) {
             Zombie zombie = new Zombie((double)(100+(i*10)), (double)(i*25+50));
