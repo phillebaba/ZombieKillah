@@ -42,7 +42,9 @@ public class Window {
         Graphics graphics = bufferStrategy.getDrawGraphics();
 
         for (GameObject object: objects) {
-            graphics.drawImage(object.getImage(), (int)object.getFrame().getX(), (int)object.getFrame().getY(), null);
+            if (object.isVisible()) {
+                graphics.drawImage(object.getImage(), (int) object.getFrame().getX(), (int) object.getFrame().getY(), null);
+            }
         }
 
         bufferStrategy.show();
