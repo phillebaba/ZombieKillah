@@ -13,22 +13,22 @@ public class ZombieKillah extends Game {
     public ZombieKillah() {
         super(20, 32, 32, "Zombie Killah");
 
-        this.player = new Player(20, 100);
-        this.objects.add(player);
+        this.player = new Player(30, 100);
+        addMovable(this.player);
 
         Map map = new Map("Map");
         map.registerColorForClass(new Color(0x454242), Wall.class);
-        objects.addAll(map.getObjects());
+        addWalls(map.getObjects());
 
         for (int i = 0; i < 10; i++) {
             Zombie zombie = new Zombie((double)(100+(i*10)), (double)(i*25+50));
-            objects.add(zombie);
+            addMovable(zombie);
         }
     }
 
     private void shoot() {
         Bullet bullet = new Bullet(player.direction, player.getFrame().getX(), player.getFrame().getY());
-        objects.add(bullet);
+        addMovable(bullet);
     }
 
     protected void update() {
@@ -48,7 +48,7 @@ public class ZombieKillah extends Game {
             shoot();
         }
 
-        for (GameObject object: objects) {
+        for (GameObject object: getMovable()) {
             if (object instanceof Zombie) {
                 ((Zombie) object).move(player.frame);
             } else if (object instanceof Bullet) {
@@ -59,9 +59,9 @@ public class ZombieKillah extends Game {
 
     protected void objectsDidCollide(GameObject object1, GameObject object2) {
         if (object1 instanceof Bullet) {
-            object1.visible = false;
+            //object1.visible = false;
         } else if (object2 instanceof Bullet) {
-            object2.visible = false;
+            //object2.visible = false;
         }
     }
 }

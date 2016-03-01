@@ -9,7 +9,7 @@ public abstract class GameObject {
     protected Image image;
     protected Rectangle2D.Double frame;
     protected Direction direction;
-    protected boolean collidable, visible;
+    protected boolean collidable, respondable, visible;
     protected float health;
     protected boolean indestructable;
     protected Image images;

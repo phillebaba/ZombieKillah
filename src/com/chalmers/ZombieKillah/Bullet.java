@@ -9,5 +9,6 @@ public class Bullet extends MovableObject {
         super("Bullet", x, y);
         this.speed = 10;
         this.direction = direction;
+        this.respondable = false;
     }
 }
