@@ -12,6 +12,7 @@ public abstract class MovableObject extends GameObject {
     public MovableObject (String path, double x, double y) {
         super(path, x, y);
         this.speed = 1;
+        this.respondable = true;
     }
 
     public void avoidCollision(GameObject object) {
@@ -38,37 +39,18 @@ public abstract class MovableObject extends GameObject {
         switch(direction){
             case NORTH:
                 changeFramePosition(0, -speed);
-<<<<<<< HEAD
-<<<<<<< HEAD
-                images.uppdateImage(direction);
-=======
->>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
-=======
->>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
                 break;
 
             case SOUTH:
                 changeFramePosition(0, speed);
-<<<<<<< HEAD
-<<<<<<< HEAD
-                images.uppdateImage(direction);
-=======
->>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
-=======
->>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
                 break;
 
             case EAST:
                 changeFramePosition(speed, 0);
-                images.uppdateImage(direction);
                 break;
 
             case WEST:
                 changeFramePosition(-speed, 0);
-                images.uppdateImage(direction);
-                break;
-
-            default:
                 break;
         }
     }

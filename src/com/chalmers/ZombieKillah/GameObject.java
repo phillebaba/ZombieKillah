@@ -25,25 +25,10 @@ public abstract class GameObject {
         this.image = new Image(path);
         this.direction = Direction.NORTH;
         this.collidable = true;
+        this.respondable = false;
         this.visible = true;
-<<<<<<< HEAD
-<<<<<<< HEAD
-        images = new Image("Player");
 
-        try {
-            this.image = ImageIO.read(new File(path + ".png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-
-        this.frame = new Rectangle2D.Double(x, y, image.getWidth(), image.getHeight());
-=======
         this.frame = new Rectangle2D.Double(x, y, 20, 20);
->>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
-=======
-        this.frame = new Rectangle2D.Double(x, y, 20, 20);
->>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
     }
 
     public float takeDamage(float damage) {
