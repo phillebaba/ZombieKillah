@@ -16,6 +16,7 @@ public abstract class GameObject {
     protected boolean collidable, visible;
     protected float health;
     protected boolean indestructable;
+    protected Image images;
 
     enum Direction {
         EAST,
@@ -32,6 +33,7 @@ public abstract class GameObject {
         this.direction = Direction.NORTH;
         this.collidable = true;
         this.visible = true;
+        images = new Image("Player");
 
         try {
             this.image = ImageIO.read(new File(path + ".png"));
