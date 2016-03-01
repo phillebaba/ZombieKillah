@@ -8,11 +8,17 @@ import java.util.HashMap;
  * Created by Philip Laine on 19/02/16.
  */
 public class ZombieKillah extends Game {
-    public ZombieKillah() {
-        super(new Map("Map"));
+    protected Player player;
 
-        this.map.registerColorForClass(new Color(0x454242), Wall.class);
-        this.objects.addAll(map.getObjects());
+    public ZombieKillah() {
+        super(20, 32, 32, "Zombie Killah");
+
+        this.player = new Player(20, 100);
+        this.objects.add(player);
+
+        Map map = new Map("Map");
+        map.registerColorForClass(new Color(0x454242), Wall.class);
+        objects.addAll(map.getObjects());
 
         for (int i = 0; i < 10; i++) {
             Zombie zombie = new Zombie((double)(100+(i*10)), (double)(i*25+50));
@@ -28,15 +34,7 @@ public class ZombieKillah extends Game {
     protected void update() {
         HashMap<Integer, Boolean> keys = Input.getInstance().getKeys();
 
-        if (keys.get(KeyEvent.VK_UP) && keys.get(KeyEvent.VK_LEFT)) {
-            player.turn(GameObject.Direction.NORTHWEST);
-        } else if (keys.get(KeyEvent.VK_UP) && keys.get(KeyEvent.VK_RIGHT)) {
-            player.turn(GameObject.Direction.NORTHEAST);
-        } else if (keys.get(KeyEvent.VK_DOWN) && keys.get(KeyEvent.VK_LEFT)) {
-            player.turn(GameObject.Direction.SOUTHWEST);
-        } else if (keys.get(KeyEvent.VK_DOWN) && keys.get(KeyEvent.VK_RIGHT)) {
-            player.turn(GameObject.Direction.SOUTHEAST);
-        } else if (keys.get(KeyEvent.VK_UP)) {
+        if (keys.get(KeyEvent.VK_UP)) {
             player.turn(GameObject.Direction.NORTH);
         } else if (keys.get(KeyEvent.VK_DOWN)) {
             player.turn(GameObject.Direction.SOUTH);

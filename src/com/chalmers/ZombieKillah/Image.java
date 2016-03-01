@@ -12,6 +12,7 @@ import java.io.IOException;
 
 
 public class Image {
+<<<<<<< HEAD
     private BufferedImage PNORTH;
     private BufferedImage PSOUTH;
     private BufferedImage PWEST;
@@ -45,9 +46,7 @@ public class Image {
                 currentImage = PNORTH;
                 break;
         }
-    }
 =======
-public class Image {
     private BufferedImage north;
     private BufferedImage south;
     private BufferedImage west;
@@ -61,8 +60,28 @@ public class Image {
         this.east = loadImage(path + "-east" + ".png");
 
         currentImage = north;
+>>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
+    }
+=======
+public class Image {
+    private BufferedImage north;
+    private BufferedImage south;
+    private BufferedImage west;
+    private BufferedImage east;
+    private BufferedImage currentImage;
+
+<<<<<<< HEAD
+    public Image(String path) {
+        this.south = loadImage(path + "-south" + ".png");
+        this.north = loadImage(path + "-north" + ".png");
+        this.west = loadImage(path + "-west" + ".png");
+        this.east = loadImage(path + "-east" + ".png");
+
+        currentImage = north;
     }
 
+=======
+>>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
     private BufferedImage loadImage(String path)  {
         try {
             return ImageIO.read(new File(path));
@@ -83,12 +102,16 @@ public class Image {
             case SOUTH:
                 currentImage = south;
                 break;
+<<<<<<< HEAD
+>>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
+=======
 >>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
 
             case WEST:
                 currentImage = west;
                 break;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     public BufferedImage getImage(String path) {
         try {
@@ -103,6 +126,16 @@ public class Image {
                 currentImage = east;
                 break;
         }
+=======
+            case EAST:
+                currentImage = east;
+                break;
+        }
+    }
+
+    public BufferedImage getCurrentImage() {
+        return currentImage;
+>>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
     }
 
     public BufferedImage getCurrentImage() {

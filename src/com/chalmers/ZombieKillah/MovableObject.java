@@ -39,7 +39,10 @@ public abstract class MovableObject extends GameObject {
             case NORTH:
                 changeFramePosition(0, -speed);
 <<<<<<< HEAD
+<<<<<<< HEAD
                 images.uppdateImage(direction);
+=======
+>>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
 =======
 >>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
                 break;
@@ -47,7 +50,10 @@ public abstract class MovableObject extends GameObject {
             case SOUTH:
                 changeFramePosition(0, speed);
 <<<<<<< HEAD
+<<<<<<< HEAD
                 images.uppdateImage(direction);
+=======
+>>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
 =======
 >>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
                 break;

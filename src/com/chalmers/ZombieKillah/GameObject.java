@@ -27,6 +27,7 @@ public abstract class GameObject {
         this.collidable = true;
         this.visible = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
         images = new Image("Player");
 
         try {
@@ -37,6 +38,9 @@ public abstract class GameObject {
         }
 
         this.frame = new Rectangle2D.Double(x, y, image.getWidth(), image.getHeight());
+=======
+        this.frame = new Rectangle2D.Double(x, y, 20, 20);
+>>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
 =======
         this.frame = new Rectangle2D.Double(x, y, 20, 20);
 >>>>>>> 12a9aafa87146623013c14d01ef39f71d1e978d4
