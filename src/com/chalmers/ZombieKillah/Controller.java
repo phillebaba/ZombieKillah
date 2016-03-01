@@ -8,18 +8,16 @@ public class Controller implements Runnable {
     private Window window;
     private Thread thread;
 
+    private static final String title = "Zombie Killah";
+    private static final int scale = 20;
+
     private boolean isRunning = false;
     private double frameCap = 1.0 / 60.0;
 
-    private final String title = "Zombie Killah";
-    private final int width = 320, height = 240;
-    private final double scale = 2.0;
-
     public Controller(Game game) {
         this.game = game;
-        this.window = new Window((int)(width * scale), (int)(height * scale), title);
+        this.window = new Window(scale*game.map.getWidth(), scale*game.map.getHeight(), title);
     }
-
 
     public void start() {
         if (isRunning)

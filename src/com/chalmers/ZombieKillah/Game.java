@@ -1,21 +1,21 @@
 package com.chalmers.ZombieKillah;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by Philip Laine on 19/02/16.
  */
 public abstract class Game {
-    private Map map;
     protected Player player;
+    protected Map map;
     protected ArrayList<GameObject> objects;
 
     protected abstract void update();
     protected abstract void objectsDidCollide(GameObject object1, GameObject object2);
 
-    public Game() {
-        this.player = new Player(10, 10);
+    public Game(Map map) {
+        this.player = new Player(20, 100);
+        this.map = map;
         this.objects = new ArrayList<GameObject>();
 
         this.objects.add(player);
@@ -33,6 +33,8 @@ public abstract class Game {
                         } else if (object2 instanceof MovableObject) {
                             ((MovableObject)object2).avoidCollision(object1);
                         }
+
+                        objectsDidCollide(object1, object2);
                     }
                 }
             }
