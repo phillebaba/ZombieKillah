@@ -28,15 +28,7 @@ public class ZombieKillah extends Game {
     protected void update() {
         HashMap<Integer, Boolean> keys = Input.getInstance().getKeys();
 
-        if (keys.get(KeyEvent.VK_UP) && keys.get(KeyEvent.VK_LEFT)) {
-            player.turn(GameObject.Direction.NORTHWEST);
-        } else if (keys.get(KeyEvent.VK_UP) && keys.get(KeyEvent.VK_RIGHT)) {
-            player.turn(GameObject.Direction.NORTHEAST);
-        } else if (keys.get(KeyEvent.VK_DOWN) && keys.get(KeyEvent.VK_LEFT)) {
-            player.turn(GameObject.Direction.SOUTHWEST);
-        } else if (keys.get(KeyEvent.VK_DOWN) && keys.get(KeyEvent.VK_RIGHT)) {
-            player.turn(GameObject.Direction.SOUTHEAST);
-        } else if (keys.get(KeyEvent.VK_UP)) {
+        if (keys.get(KeyEvent.VK_UP)) {
             player.turn(GameObject.Direction.NORTH);
         } else if (keys.get(KeyEvent.VK_DOWN)) {
             player.turn(GameObject.Direction.SOUTH);

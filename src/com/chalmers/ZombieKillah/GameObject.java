@@ -1,16 +1,13 @@
 package com.chalmers.ZombieKillah;
 
-import javax.imageio.ImageIO;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by Philip Laine on 20/02/16.
  */
 public abstract class GameObject {
-    protected BufferedImage image;
+    protected Image image;
     protected Rectangle2D.Double frame;
     protected Direction direction;
     protected boolean collidable, visible;
@@ -21,26 +18,15 @@ public abstract class GameObject {
         EAST,
         WEST,
         NORTH,
-        NORTHWEST,
-        NORTHEAST,
         SOUTH,
-        SOUTHWEST,
-        SOUTHEAST
     }
 
     public GameObject(String path, double x, double y) {
+        this.image = new Image(path);
         this.direction = Direction.NORTH;
         this.collidable = true;
         this.visible = true;
-
-        try {
-            this.image = ImageIO.read(new File(path + ".png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-
-        this.frame = new Rectangle2D.Double(x, y, image.getWidth(), image.getHeight());
+        this.frame = new Rectangle2D.Double(x, y, 20, 20);
     }
 
     public float takeDamage(float damage) {
@@ -51,7 +37,7 @@ public abstract class GameObject {
         return 0;
     }
 
-    public BufferedImage getImage() {
+    public Image getImage() {
         return image;
     }
 

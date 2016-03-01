@@ -43,7 +43,7 @@ public class Window {
 
         for (GameObject object: objects) {
             if (object.isVisible()) {
-                graphics.drawImage(object.getImage(), (int) object.getFrame().getX(), (int) object.getFrame().getY(), null);
+                graphics.drawImage(object.getImage().getCurrentImage(), (int) object.getFrame().getX(), (int) object.getFrame().getY(), null);
             }
         }
 

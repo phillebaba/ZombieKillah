@@ -33,29 +33,15 @@ public abstract class MovableObject extends GameObject {
     }
 
     protected void step(){
+        image.updateImage(direction);
+
         switch(direction){
             case NORTH:
                 changeFramePosition(0, -speed);
                 break;
 
-            case NORTHEAST:
-                changeFramePosition(speed, -speed);
-                break;
-
-            case NORTHWEST:
-                changeFramePosition(-speed, -speed);
-                break;
-
             case SOUTH:
                 changeFramePosition(0, speed);
-                break;
-
-            case SOUTHEAST:
-                changeFramePosition(speed, speed);
-                break;
-
-            case SOUTHWEST:
-                changeFramePosition(-speed, speed);
                 break;
 
             case EAST:
