@@ -1,5 +1,6 @@
 package com.chalmers.ZombieKillah;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -7,6 +8,7 @@ import java.util.Iterator;
  * Created by Philip Laine on 19/02/16.
  */
 public abstract class Game {
+    private Stats stats;
     private int width;
     private int height;
     private String title;
@@ -16,6 +18,7 @@ public abstract class Game {
     private ArrayList<MovableObject> movable;
     private ArrayList<GameObject> foreground;
     private ArrayList<GameObject> background;
+    private ArrayList<Component> UI;
 
     public Game(int gridSize, int heightCount, int widthCount, String title) {
         this.height = heightCount * gridSize;
@@ -23,10 +26,11 @@ public abstract class Game {
         this.title = title;
         this.gridSize = gridSize;
 
-        this.all = new ArrayList<GameObject>();
-        this.movable =  new ArrayList<MovableObject>();
-        this.foreground =  new ArrayList<GameObject>();
-        this.background =  new ArrayList<GameObject>();
+        this.all = new ArrayList<>();
+        this.movable =  new ArrayList<>();
+        this.foreground =  new ArrayList<>();
+        this.background =  new ArrayList<>();
+        this.UI = new ArrayList<>();
     }
 
     public void update() {
@@ -81,7 +85,7 @@ public abstract class Game {
         foreground.add(gameObject);
     }
 
-    public void addWalls(ArrayList<GameObject> gameObjects) {
+    public void addForegrounds(ArrayList<GameObject> gameObjects) {
         all.addAll(gameObjects);
         foreground.addAll(gameObjects);
     }
@@ -91,10 +95,26 @@ public abstract class Game {
         background.add(gameObject);
     }
 
-    public void addFloors(ArrayList<GameObject> gameObjects) {
+    public void addBackgrounds(ArrayList<GameObject> gameObjects) {
         all.addAll(gameObjects);
         background.addAll(gameObjects);
     }
+
+    public void clearAllObjects() {
+        all.clear();
+        movable.clear();
+        foreground.clear();
+        background.clear();
+    }
+
+    public void addUI(Component component) {
+        UI.add(component);
+    }
+
+    public void removeUI(Component component) {
+        UI.remove(component);
+    }
+
 
     public int getWidth() {
         return width;

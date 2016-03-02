@@ -18,7 +18,7 @@ public class ZombieKillah extends Game {
 
         Map map = new Map("Map");
         map.registerColorForClass(new Color(0x454242), Wall.class);
-        addWalls(map.getObjects());
+        addForegrounds(map.getObjects());
 
         for (int i = 0; i < 10; i++) {
             Zombie zombie = new Zombie((double)(100+(i*10)), (double)(i*25+50));
