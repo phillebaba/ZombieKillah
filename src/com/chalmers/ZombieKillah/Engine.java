@@ -3,7 +3,7 @@ package com.chalmers.ZombieKillah;
 /**
  * Created by Philip Laine on 19/02/16.
  */
-public class Controller implements Runnable {
+public class Engine implements Runnable {
     private Game game;
     private Window window;
 
@@ -11,7 +11,7 @@ public class Controller implements Runnable {
     private boolean isRunning = false;
     private double frameCap = 1.0 / 60.0;
 
-    public Controller(Game game) {
+    public Engine(Game game) {
         this.game = game;
         this.window = new Window(game.getHeight(), game.getWidth(), game.getTitle());
     }
