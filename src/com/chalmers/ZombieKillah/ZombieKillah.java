@@ -7,11 +7,11 @@ import java.util.HashMap;
 /**
  * Created by Philip Laine on 19/02/16.
  */
-public class ZombieKillah extends Game {
+public class ZombieKillah extends Controller {
     protected Player player;
 
     public ZombieKillah() {
-        super(20, 32, 32, "Zombie Killah");
+        super(640, 640, "Zombie Killah");
 
         this.player = new Player(30, 100);
         addMovable(this.player);

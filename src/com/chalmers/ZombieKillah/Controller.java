@@ -7,7 +7,11 @@ import java.util.Iterator;
 /**
  * Created by Philip Laine on 19/02/16.
  */
-public abstract class Game {
+public abstract class Controller {
+    private Window window;
+    private GameLoop gameLoop;
+    private Thread thread;
+
     private Stats stats;
     private int width;
     private int height;
@@ -20,17 +24,23 @@ public abstract class Game {
     private ArrayList<GameObject> background;
     private ArrayList<Component> UI;
 
-    public Game(int gridSize, int heightCount, int widthCount, String title) {
-        this.height = heightCount * gridSize;
-        this.width = widthCount * gridSize;
-        this.title = title;
-        this.gridSize = gridSize;
+    public Controller(int height, int width, String title) {
+        this.window = new Window(height, width, title);
+        this.gameLoop = new GameLoop();
 
         this.all = new ArrayList<>();
         this.movable =  new ArrayList<>();
         this.foreground =  new ArrayList<>();
         this.background =  new ArrayList<>();
         this.UI = new ArrayList<>();
+    }
+
+    public void start() {
+        if (gameLoop.isRunning)
+            return;
+
+        thread = new Thread(gameLoop);
+        thread.run();
     }
 
     public void update() {
@@ -42,30 +52,14 @@ public abstract class Game {
             }
         }
 
-        checkCollisions();
+        //checkCollisions();
     }
 
-    private void checkCollisions() {
-        int index = 1;
+    public void stop() {
+        if (!gameLoop.isRunning)
+            return;
 
-        for (GameObject object1: foreground) {
-            if (object1.collidable) {
-                for (GameObject object2 : foreground.subList(index, foreground.size())) {
-                    if (object2.collidable && object1.frame.intersects(object2.frame)) {
-                        if (object1 instanceof MovableObject && (object1.respondable && object2.respondable)) {
-                            ((MovableObject)object1).avoidCollision(object2);
-                        } else if (object2 instanceof MovableObject && (object1.respondable && object2.respondable)) {
-                            ((MovableObject)object2).avoidCollision(object1);
-                        }
-
-                        object1.onCollision(object2);
-                        object2.onCollision(object1);
-                    }
-                }
-            }
-
-            index++;
-        }
+        gameLoop.isRunning = false;
     }
 
     public void addMovable(MovableObject movableObject) {
@@ -142,5 +136,69 @@ public abstract class Game {
 
     public ArrayList<GameObject> getBackground() {
         return background;
+    }
+
+
+
+
+
+
+
+
+    class GameLoop implements Runnable {
+        private boolean isRunning = false;
+        private double frameCap = 1.0 / 60.0;
+
+        @Override
+        public void run() {
+            isRunning = true;
+
+            double firstTime = 0;
+            double lastTime = System.nanoTime() / 1000000000.0;
+            double passedTime  = 0;
+            double unprocessedTime = 0;
+            double frameTime = 0;
+            int frameCount = 0;
+
+            while (isRunning) {
+                boolean render = false;
+
+                firstTime = System.nanoTime() / 1000000000.0;
+                passedTime = firstTime - lastTime;
+                lastTime = firstTime;
+
+                unprocessedTime += passedTime;
+                frameTime += passedTime;
+
+                while (unprocessedTime >= frameCap) {
+                    update();
+
+                    unprocessedTime -= frameCap;
+                    render = true;
+
+                    if (frameTime >= 1) {
+                        logFrameRate(frameCount);
+                        frameTime = 0;
+                        frameCount = 0;
+                    }
+                }
+
+                if (render) {
+                    window.clear();
+                    window.draw(getForeground());
+                    frameCount++;
+                } else {
+                    try {
+                        Thread.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        public void logFrameRate(int frameRate) {
+            System.out.println(frameRate);
+        }
     }
 }
