@@ -30,4 +30,17 @@ public class Zombie extends Character {
         super.step();
     }
 
+    @Override
+    public void didCollide(GameObject object) {
+        super.didCollide(object);
+
+        if (object instanceof Bullet) {
+            Bullet bullet = (Bullet)object;
+            takeDamage(bullet.getDamage());
+
+            if (health <= 0) {
+                kill();
+            }
+        }
+    }
 }

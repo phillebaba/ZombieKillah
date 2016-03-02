@@ -7,6 +7,7 @@ public class Wall extends GameObject {
 
     public Wall (double x, double y){
         super("Wall", x, y);
+        indestructable = true;
     }
 
 }
