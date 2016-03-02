@@ -27,7 +27,6 @@ public class Window {
         this.frame.setResizable(false);
         this.frame.add(canvas);
         this.frame.pack();
-
         this.frame.addKeyListener(Input.getInstance()); // Set frame key listener
 
         this.canvas.createBufferStrategy(2); // Create buffer strategy, must be called after setting frame
