@@ -1,5 +1,6 @@
 package com.chalmers.ZombieKillah;
 
+import javax.swing.*;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -13,6 +14,8 @@ public abstract class GameObject {
     protected boolean collidable, respondable, visible, indestructable;
     protected float health;
     protected Image images;
+    protected JLabel scoreBoardLabel;
+    protected int killed;
 
     enum Direction {
         EAST,
@@ -29,6 +32,10 @@ public abstract class GameObject {
         this.respondable = false;
         this.visible = true;
         this.indestructable = false;
+        killed = 0;
+        scoreBoardLabel = new JLabel("" + killed, SwingConstants.NORTH_EAST);
+
+
 
         this.frame = new Rectangle2D.Double(x, y, 20, 20);
     }
@@ -49,6 +56,13 @@ public abstract class GameObject {
         visible = false;
         collidable = false;
         health = 0;
+        killed++;
+        score();
+    }
+
+    public void score() {
+        scoreBoardLabel.setText(String.valueOf(killed));
+        scoreBoardLabel.setVisible(true);
     }
 
     public boolean isAllive() {
