@@ -15,8 +15,8 @@ public class Bullet extends MovableObject {
     }
 
     @Override
-    public void didCollide(GameObject object) {
-        super.didCollide(object);
+    public void onCollision(GameObject object) {
+        super.onCollision(object);
 
         if (object instanceof Player == false && object instanceof Bullet == false) {
             kill();

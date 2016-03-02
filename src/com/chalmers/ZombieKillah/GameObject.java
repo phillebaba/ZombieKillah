@@ -40,7 +40,7 @@ public abstract class GameObject {
         this.frame = new Rectangle2D.Double(x, y, 20, 20);
     }
 
-    public void didCollide(GameObject object) {
+    public void onCollision(GameObject object) {
 
     }
 

@@ -19,4 +19,13 @@ public class Player extends Character {
             this.direction = direction;
         }
     }
+
+    @Override
+    public void onCollision(GameObject object) {
+        super.onCollision(object);
+
+        if (object instanceof Zombie) {
+
+        }
+    }
 }

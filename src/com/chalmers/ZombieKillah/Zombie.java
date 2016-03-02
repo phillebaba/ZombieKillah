@@ -31,8 +31,8 @@ public class Zombie extends Character {
     }
 
     @Override
-    public void didCollide(GameObject object) {
-        super.didCollide(object);
+    public void onCollision(GameObject object) {
+        super.onCollision(object);
 
         if (object instanceof Bullet) {
             Bullet bullet = (Bullet)object;

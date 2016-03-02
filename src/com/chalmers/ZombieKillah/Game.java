@@ -54,8 +54,8 @@ public abstract class Game {
                             ((MovableObject)object2).avoidCollision(object1);
                         }
 
-                        object1.didCollide(object2);
-                        object2.didCollide(object1);
+                        object1.onCollision(object2);
+                        object2.onCollision(object1);
                     }
                 }
             }
