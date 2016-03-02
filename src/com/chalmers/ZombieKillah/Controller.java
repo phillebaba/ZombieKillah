@@ -46,7 +46,6 @@ public class Controller implements Runnable {
 
             while (unprocessedTime >= frameCap) {
                 game.update();
-                game.checkCollisions();
 
                 unprocessedTime -= frameCap;
                 render = true;

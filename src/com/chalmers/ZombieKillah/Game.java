@@ -1,6 +1,7 @@
 package com.chalmers.ZombieKillah;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Philip Laine on 19/02/16.
@@ -16,9 +17,6 @@ public abstract class Game {
     private ArrayList<GameObject> foreground;
     private ArrayList<GameObject> background;
 
-    protected abstract void update();
-    protected abstract void objectsDidCollide(GameObject object1, GameObject object2);
-
     public Game(int gridSize, int heightCount, int widthCount, String title) {
         this.height = heightCount * gridSize;
         this.width = widthCount * gridSize;
@@ -31,20 +29,33 @@ public abstract class Game {
         this.background =  new ArrayList<GameObject>();
     }
 
-    public void checkCollisions() {
+    public void update() {
+        Iterator iterator = all.iterator();
+        while (iterator.hasNext()) {
+            GameObject gameObject = (GameObject)iterator.next();
+            if (!gameObject.isAllive()) {
+                iterator.remove();
+            }
+        }
+
+        checkCollisions();
+    }
+
+    private void checkCollisions() {
         int index = 1;
 
-        for (GameObject object1: all) {
+        for (GameObject object1: foreground) {
             if (object1.collidable) {
-                for (GameObject object2 : all.subList(index, all.size())) {
-                    if (object2.collidable && (object1.respondable && object2.respondable) && object1.frame.intersects(object2.frame)) {
-                        if (object1 instanceof MovableObject) {
+                for (GameObject object2 : foreground.subList(index, foreground.size())) {
+                    if (object2.collidable && object1.frame.intersects(object2.frame)) {
+                        if (object1 instanceof MovableObject && (object1.respondable && object2.respondable)) {
                             ((MovableObject)object1).avoidCollision(object2);
-                        } else if (object2 instanceof MovableObject) {
+                        } else if (object2 instanceof MovableObject && (object1.respondable && object2.respondable)) {
                             ((MovableObject)object2).avoidCollision(object1);
                         }
 
-                        objectsDidCollide(object1, object2);
+                        object1.didCollide(object2);
+                        object2.didCollide(object1);
                     }
                 }
             }
@@ -84,8 +95,6 @@ public abstract class Game {
         all.addAll(gameObjects);
         background.addAll(gameObjects);
     }
-
-
 
     public int getWidth() {
         return width;

@@ -6,12 +6,12 @@ import java.awt.geom.Rectangle2D;
  * Created by Philip Laine on 20/02/16.
  */
 public abstract class GameObject {
+    private boolean allive;
     protected Image image;
     protected Rectangle2D.Double frame;
     protected Direction direction;
-    protected boolean collidable, respondable, visible;
+    protected boolean collidable, respondable, visible, indestructable;
     protected float health;
-    protected boolean indestructable;
     protected Image images;
 
     enum Direction {
@@ -22,21 +22,37 @@ public abstract class GameObject {
     }
 
     public GameObject(String path, double x, double y) {
+        this.allive = true;
         this.image = new Image(path);
         this.direction = Direction.NORTH;
         this.collidable = true;
         this.respondable = false;
         this.visible = true;
+        this.indestructable = false;
 
         this.frame = new Rectangle2D.Double(x, y, 20, 20);
     }
 
-    public float takeDamage(float damage) {
-        if ((!this.getIndestrutable()) && (this.health - damage) > 0){
-            this.health -= damage;
-            return this.health;
+    public void didCollide(GameObject object) {
+
+    }
+
+    public final void takeDamage(float damage) {
+        if (!indestructable && damage > 0) {
+            health -= damage;
         }
-        return 0;
+    }
+
+    protected void kill() {
+        allive = false;
+        respondable = false;
+        visible = false;
+        collidable = false;
+        health = 0;
+    }
+
+    public boolean isAllive() {
+        return allive;
     }
 
     public Image getImage() {

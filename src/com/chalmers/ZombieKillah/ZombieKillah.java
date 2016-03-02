@@ -26,14 +26,23 @@ public class ZombieKillah extends Game {
         }
     }
 
-    private void shoot() {
-        Bullet bullet = new Bullet(player.direction, player.getFrame().getX(), player.getFrame().getY());
-        addMovable(bullet);
+    @Override
+    public void update() {
+        super.update();
+
+        movePlayer();
+
+        for (GameObject object: getMovable()) {
+            if (object instanceof Zombie) {
+                ((Zombie) object).move(player.frame);
+            } else if (object instanceof Bullet) {
+                ((Bullet)object).step();
+            }
+        }
     }
 
-    protected void update() {
+    private void movePlayer() {
         HashMap<Integer, Boolean> keys = Input.getInstance().getKeys();
-
         if (keys.get(KeyEvent.VK_UP)) {
             player.turn(GameObject.Direction.NORTH);
         } else if (keys.get(KeyEvent.VK_DOWN)) {
@@ -47,21 +56,10 @@ public class ZombieKillah extends Game {
         if (keys.get(KeyEvent.VK_SPACE)) {
             shoot();
         }
-
-        for (GameObject object: getMovable()) {
-            if (object instanceof Zombie) {
-                ((Zombie) object).move(player.frame);
-            } else if (object instanceof Bullet) {
-                ((Bullet)object).step();
-            }
-        }
     }
 
-    protected void objectsDidCollide(GameObject object1, GameObject object2) {
-        if (object1 instanceof Bullet) {
-            //object1.visible = false;
-        } else if (object2 instanceof Bullet) {
-            //object2.visible = false;
-        }
+    private void shoot() {
+        Bullet bullet = new Bullet(player.direction, player.getFrame().getCenterX(), player.getFrame().getCenterY());
+        addMovable(bullet);
     }
 }
