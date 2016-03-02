@@ -54,12 +54,11 @@ public class ZombieKillah extends Game {
         }
 
         if (keys.get(KeyEvent.VK_SPACE)) {
-            shoot();
-        }
-    }
+            try {
+                addMovable(player.shoot());
+            } catch (Exception e) {
 
-    private void shoot() {
-        Bullet bullet = new Bullet(player.direction, player.getFrame().getCenterX(), player.getFrame().getCenterY());
-        addMovable(bullet);
+            }
+        }
     }
 }

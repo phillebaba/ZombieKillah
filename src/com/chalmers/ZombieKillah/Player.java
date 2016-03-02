@@ -4,11 +4,11 @@ package com.chalmers.ZombieKillah;
  * Created by Philip Laine on 20/02/24.
  */
 public class Player extends Character {
-    private String path;
-
     public Player(double x, double y) {
         super("Player", x, y);
         this.speed = 2;
+
+        addWeapon(new Weapon());
     }
 
     public void turn(Direction direction) {
