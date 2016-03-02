@@ -8,7 +8,8 @@ public class Player extends Character {
         super("Player", x, y);
         this.speed = 2;
 
-        addWeapon(new Weapon());
+        addWeapon(new Gun());
+        addWeapon(new MachineGun());
     }
 
     public void turn(Direction direction) {

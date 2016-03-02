@@ -17,10 +17,18 @@ public abstract class Character extends MovableObject {
     }
 
     public void addWeapon(Weapon weapon) {
-        weapons.add(weapon);
+        if (weapons.size() < 9) {
+            weapons.add(weapon);
 
-        if (currentWeapon == null) {
-            currentWeapon = weapon;
+            if (currentWeapon == null) {
+                currentWeapon = weapon;
+            }
+        }
+    }
+
+    public void changeWeapon(int index) {
+        if (index > 0 && index <= weapons.size()) {
+            currentWeapon = weapons.get(index-1);
         }
     }
 

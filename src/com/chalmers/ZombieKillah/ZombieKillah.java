@@ -30,7 +30,7 @@ public class ZombieKillah extends Game {
     public void update() {
         super.update();
 
-        movePlayer();
+        checkInputs();
 
         for (GameObject object: getMovable()) {
             if (object instanceof Zombie) {
@@ -41,7 +41,7 @@ public class ZombieKillah extends Game {
         }
     }
 
-    private void movePlayer() {
+    private void checkInputs() {
         HashMap<Integer, Boolean> keys = Input.getInstance().getKeys();
         if (keys.get(KeyEvent.VK_UP)) {
             player.turn(GameObject.Direction.NORTH);
@@ -59,6 +59,26 @@ public class ZombieKillah extends Game {
             } catch (Exception e) {
 
             }
+        }
+
+        if (keys.get(KeyEvent.VK_1)) {
+            player.changeWeapon(1);
+        } else if (keys.get(KeyEvent.VK_2)) {
+            player.changeWeapon(2);
+        } else if (keys.get(KeyEvent.VK_3)) {
+            player.changeWeapon(3);
+        } else if (keys.get(KeyEvent.VK_4)) {
+            player.changeWeapon(4);
+        } else if (keys.get(KeyEvent.VK_5)) {
+            player.changeWeapon(5);
+        } else if (keys.get(KeyEvent.VK_6)) {
+            player.changeWeapon(6);
+        } else if (keys.get(KeyEvent.VK_7)) {
+            player.changeWeapon(7);
+        } else if (keys.get(KeyEvent.VK_8)) {
+            player.changeWeapon(8);
+        } else if (keys.get(KeyEvent.VK_9)) {
+            player.changeWeapon(9);
         }
     }
 }

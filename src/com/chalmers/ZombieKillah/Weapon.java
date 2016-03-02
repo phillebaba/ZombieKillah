@@ -8,20 +8,20 @@ import javax.swing.*;
 /**
  * Created by Sebastian Lind on 2016-02-23.
  */
-public class Weapon {
-    private double cooldownTime;
+public abstract class Weapon {
     private boolean canFire;
     private Timer timer;
+    protected double coolDownTime;
 
-    public Weapon (){
-        this.cooldownTime = 0.5;
+    public Weapon (double coolDownTime){
         this.canFire = true;
+        this.coolDownTime = coolDownTime;
 
         ActionListener actionListener = e -> {
             canFire = true;
             timer.stop();
         };
-        this.timer = new Timer((int)(cooldownTime * 1000), actionListener);
+        this.timer = new Timer((int)(coolDownTime * 1000), actionListener);
     }
 
     public Bullet getBullets(GameObject.Direction direction, Point2D.Double origin) throws Exception {
