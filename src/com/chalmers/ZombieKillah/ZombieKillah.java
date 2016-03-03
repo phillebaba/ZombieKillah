@@ -2,6 +2,7 @@ package com.chalmers.ZombieKillah;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Point2D;
 import java.util.HashMap;
 
 /**
@@ -11,7 +12,7 @@ public class ZombieKillah extends Controller {
     protected Player player;
 
     public ZombieKillah() {
-        super(640, 640, "Zombie Killah");
+        super(20, 32, 32, "Zombie Killah");
 
         this.player = new Player(30, 100);
         addMovable(this.player);
@@ -24,6 +25,9 @@ public class ZombieKillah extends Controller {
             Zombie zombie = new Zombie((double)(100+(i*10)), (double)(i*25+50));
             addMovable(zombie);
         }
+
+        Text text = new Text(new Point2D.Double(30, 50), "Hello World");
+        addText(text);
     }
 
     @Override

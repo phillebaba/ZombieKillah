@@ -8,38 +8,41 @@ import java.util.Iterator;
  * Created by Philip Laine on 19/02/16.
  */
 public abstract class Controller {
-    private Window window;
-    private GameLoop gameLoop;
-    private Thread thread;
+    private static int gridDimension;
+    private static int width;
+    private static int height;
 
-    private Stats stats;
-    private int width;
-    private int height;
-    private String title;
-    private static int gridSize;
+    private Window window;
+    private Engine engine;
+    private Thread thread;
 
     private ArrayList<GameObject> all;
     private ArrayList<MovableObject> movable;
     private ArrayList<GameObject> foreground;
     private ArrayList<GameObject> background;
-    private ArrayList<Component> UI;
+    private ArrayList<Text> texts;
 
-    public Controller(int height, int width, String title) {
+    public Controller(int gridDimension, int rowCount, int columnCount, String title) {
+        this.gridDimension = gridDimension;
+        this.width = gridDimension*rowCount;
+        this.height = gridDimension*columnCount;
+
         this.window = new Window(height, width, title);
-        this.gameLoop = new GameLoop();
+        this.engine = new Engine();
+
 
         this.all = new ArrayList<>();
         this.movable =  new ArrayList<>();
         this.foreground =  new ArrayList<>();
         this.background =  new ArrayList<>();
-        this.UI = new ArrayList<>();
+        this.texts = new ArrayList<>();
     }
 
     public void start() {
-        if (gameLoop.isRunning)
+        if (engine.isRunning)
             return;
 
-        thread = new Thread(gameLoop);
+        thread = new Thread(engine);
         thread.run();
     }
 
@@ -52,14 +55,14 @@ public abstract class Controller {
             }
         }
 
-        //checkCollisions();
+        CollisionDetector.checkCollisions(foreground);
     }
 
     public void stop() {
-        if (!gameLoop.isRunning)
+        if (!engine.isRunning)
             return;
 
-        gameLoop.isRunning = false;
+        engine.isRunning = false;
     }
 
     public void addMovable(MovableObject movableObject) {
@@ -101,29 +104,29 @@ public abstract class Controller {
         background.clear();
     }
 
-    public void addUI(Component component) {
-        UI.add(component);
+    public void addText(Text text) {
+        texts.add(text);
     }
 
-    public void removeUI(Component component) {
-        UI.remove(component);
+    public void removeText(Text text) {
+        texts.remove(text);
     }
 
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
+    public static int getHeight() {
         return height;
     }
 
-    public String getTitle() {
-        return title;
+    public static int getWidth() {
+        return width;
     }
 
-    public static int getGridSize() {
-        return gridSize;
+    public static int getGridDimension() {
+        return gridDimension;
+    }
+
+    public ArrayList<GameObject> getAll() {
+        return all;
     }
 
     public ArrayList<MovableObject> getMovable() {
@@ -138,14 +141,15 @@ public abstract class Controller {
         return background;
     }
 
+    public ArrayList<Text> getTexts() {
+        return texts;
+    }
 
+    public Window getWindow() {
+        return window;
+    }
 
-
-
-
-
-
-    class GameLoop implements Runnable {
+    class Engine implements Runnable {
         private boolean isRunning = false;
         private double frameCap = 1.0 / 60.0;
 
@@ -185,7 +189,7 @@ public abstract class Controller {
 
                 if (render) {
                     window.clear();
-                    window.draw(getForeground());
+                    window.draw(getAll(), getTexts());
                     frameCount++;
                 } else {
                     try {

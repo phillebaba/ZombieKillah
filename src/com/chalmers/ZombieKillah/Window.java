@@ -37,13 +37,17 @@ public class Window {
         bufferStrategy.getDrawGraphics().clearRect(0, 0, frame.getWidth(), frame.getHeight());
     }
 
-    public void draw(ArrayList<GameObject> objects) {
+    public void draw(ArrayList<GameObject> objects, ArrayList<Text> texts) {
         Graphics graphics = bufferStrategy.getDrawGraphics();
 
         for (GameObject object: objects) {
             if (object.isVisible()) {
                 graphics.drawImage(object.getImage().getCurrentImage(), (int) object.getFrame().getX(), (int) object.getFrame().getY(), null);
             }
+        }
+
+        for (Text text: texts) {
+            graphics.drawString(text.getText(), (int)text.getPosition().getX(), (int)text.getPosition().getY());
         }
 
         bufferStrategy.show();
