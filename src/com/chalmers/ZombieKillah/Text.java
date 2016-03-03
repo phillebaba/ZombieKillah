@@ -10,6 +10,7 @@ public class Text {
     private Point2D.Double position;
     private String text;
     private Color textColor;
+    private Font textFont;
 
     public Text(Point2D.Double position, String text) {
         this.position = position;
@@ -28,11 +29,19 @@ public class Text {
         return textColor;
     }
 
+    public Font getTextFont() {
+        return textFont;
+    }
+
     public void setText(String text) {
         this.text = text;
     }
 
     public void setTextColor(Color textColor) {
         this.textColor = textColor;
+    }
+
+    public void setTextFont(Font textFont) {
+        this.textFont = textFont;
     }
 }

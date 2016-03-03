@@ -27,8 +27,9 @@ public class ZombieKillah extends Controller {
             addMovable(zombie);
         }
 
-        this.healthText = new Text(new Point2D.Double(10, 20), "");
+        this.healthText = new Text(new Point2D.Double(10, 25), "");
         this.healthText.setTextColor(Color.white);
+        this.healthText.setTextFont(new Font("Arial", Font.PLAIN, 25));
         addText(healthText);
     }
 

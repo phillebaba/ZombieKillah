@@ -48,6 +48,7 @@ public class Window {
 
         for (Text text: texts) {
             graphics.setColor(text.getTextColor());
+            graphics.setFont(text.getTextFont());
             graphics.drawString(text.getText(), (int)text.getPosition().getX(), (int)text.getPosition().getY());
         }
 
