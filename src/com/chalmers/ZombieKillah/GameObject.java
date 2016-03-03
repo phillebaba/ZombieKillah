@@ -25,7 +25,7 @@ public abstract class GameObject {
         this.image = new Image(path);
         this.direction = Direction.NORTH;
         this.collidable = true;
-        this.respondable = false;
+        this.respondable = true;
         this.visible = true;
         this.indestructable = false;
 

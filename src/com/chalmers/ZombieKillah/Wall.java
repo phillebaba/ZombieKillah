@@ -9,5 +9,4 @@ public class Wall extends GameObject {
         super("Wall", x, y);
         indestructable = true;
     }
-
 }
