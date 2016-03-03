@@ -1,6 +1,5 @@
 package com.chalmers.ZombieKillah;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -22,7 +21,7 @@ public abstract class Controller {
     private ArrayList<GameObject> background;
     private ArrayList<Text> texts;
 
-    public Controller(int gridDimension, int rowCount, int columnCount, String title) {
+    public Controller(int gridDimension, int columnCount, int rowCount, String title) {
         this.gridDimension = gridDimension;
         this.width = gridDimension*rowCount;
         this.height = gridDimension*columnCount;

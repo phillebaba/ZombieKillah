@@ -42,7 +42,7 @@ public class Map {
                 Color color = new Color(mapImage.getRGB(x, y));
                 if (color != Color.white && classMap.containsKey(color)) {
                     //try {
-                        objects.add(new Wall(x*20, y*20));
+                        objects.add(new Wall(x*Controller.getGridDimension(), y*Controller.getGridDimension()));
                         //objects.add((GameObject) classMap.get(color).newInstance());
                     /*} catch (InstantiationException | IllegalAccessException e) {
                         e.printStackTrace();

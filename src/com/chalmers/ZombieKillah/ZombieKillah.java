@@ -9,16 +9,16 @@ import java.util.HashMap;
  * Created by Philip Laine on 19/02/16.
  */
 public class ZombieKillah extends Controller {
-    protected Player player;
+    private Player player;
 
     public ZombieKillah() {
-        super(20, 32, 32, "Zombie Killah");
+        super(30, 30, 20, "Zombie Killah");
 
         this.player = new Player(30, 100);
         addMovable(this.player);
 
         Map map = new Map("Map");
-        map.registerColorForClass(new Color(0x454242), Wall.class);
+        map.registerColorForClass(new Color(0x000000), Wall.class);
         addForegrounds(map.getObjects());
 
         for (int i = 0; i < 10; i++) {

@@ -29,7 +29,7 @@ public abstract class GameObject {
         this.visible = true;
         this.indestructable = false;
 
-        this.frame = new Rectangle2D.Double(x, y, 20, 20);
+        this.frame = new Rectangle2D.Double(x, y, Controller.getGridDimension(), Controller.getGridDimension());
     }
 
     public void onCollision(GameObject object) {
@@ -42,7 +42,7 @@ public abstract class GameObject {
         }
     }
 
-    protected void kill() {
+    public final void kill() {
         allive = false;
         respondable = false;
         visible = false;
