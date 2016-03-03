@@ -64,7 +64,7 @@ public class ZombieKillah extends Controller {
 
         if (keys.get(KeyEvent.VK_SPACE)) {
             try {
-                addMovable(player.shoot());
+                addMovable(((Gun)player.getCurrentWeapon()).shoot(player.getDirection(), new Point2D.Double(player.getFrame().getX(), player.getFrame().getY())));
             } catch (Exception e) {
 
             }

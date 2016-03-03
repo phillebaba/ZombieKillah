@@ -1,6 +1,5 @@
 package com.chalmers.ZombieKillah;
 
-import java.awt.geom.Point2D;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -9,30 +8,34 @@ import javax.swing.*;
  * Created by Sebastian Lind on 2016-02-23.
  */
 public abstract class Weapon {
-    private boolean canFire;
     private Timer timer;
-    protected double coolDownTime;
+    private boolean usable;
+    private double damage;
+    private double coolDownTime;
 
-    public Weapon (double coolDownTime){
-        this.canFire = true;
+    public Weapon (double coolDownTime, double damage){
+        this.usable = true;
         this.coolDownTime = coolDownTime;
+        this.damage = damage;
 
         ActionListener actionListener = e -> {
-            canFire = true;
+            usable = true;
             timer.stop();
         };
         this.timer = new Timer((int)(coolDownTime * 1000), actionListener);
     }
 
-    public Bullet getBullets(GameObject.Direction direction, Point2D.Double origin) throws Exception {
-        if (canFire) {
-            canFire = false;
+    protected double use() {
+        if (usable) {
+            usable = false;
             timer.start();
-
-            Bullet bullet = new Bullet(direction, origin.getX(), origin.getY());
-            return bullet;
+            return damage;
         }
 
-        throw new Exception("Gun cant fire");
+        return 0;
+    }
+
+    public boolean isUsable() {
+        return usable;
     }
 }

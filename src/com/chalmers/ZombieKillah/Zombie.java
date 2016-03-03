@@ -10,6 +10,8 @@ public class Zombie extends Character {
     public Zombie(double x, double y){
         super("Zombie", x, y);
         this.speed = 0.1;
+
+        addWeapon(new Hand());
     }
 
     public void move(Rectangle2D.Double destination){

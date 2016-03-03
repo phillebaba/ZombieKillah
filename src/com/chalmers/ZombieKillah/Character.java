@@ -32,10 +32,6 @@ public abstract class Character extends MovableObject {
         }
     }
 
-    public Bullet shoot() throws Exception {
-        return currentWeapon.getBullets(direction, new Point2D.Double(frame.getX(), frame.getY()));
-    }
-
     public Weapon getCurrentWeapon() {
         return currentWeapon;
     }

@@ -4,12 +4,12 @@ package com.chalmers.ZombieKillah;
  * Created by Jesper Rask on 2016-02-24.
  */
 public class Bullet extends MovableObject {
-    private int damage;
+    private double damage;
 
-    public Bullet(Direction direction, double x, double y){
+    public Bullet(double damage, Direction direction, double x, double y){
         super("Bullet", x, y);
         this.speed = 8;
-        this.damage = 25;
+        this.damage = damage;
         this.direction = direction;
         this.respondable = false;
     }
@@ -23,7 +23,7 @@ public class Bullet extends MovableObject {
         }
     }
 
-    public int getDamage() {
+    public double getDamage() {
         return damage;
     }
 }

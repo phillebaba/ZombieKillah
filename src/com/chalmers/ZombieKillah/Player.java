@@ -9,7 +9,6 @@ public class Player extends Character {
         this.speed = 2;
 
         addWeapon(new Gun());
-        addWeapon(new MachineGun());
     }
 
     public void turn(Direction direction) {
@@ -25,7 +24,7 @@ public class Player extends Character {
         super.onCollision(object);
 
         if (object instanceof Zombie) {
-
+            takeDamage(((Zombie) object).getCurrentWeapon().use());
         }
     }
 }
