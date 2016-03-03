@@ -47,6 +47,7 @@ public class Window {
         }
 
         for (Text text: texts) {
+            graphics.setColor(text.getTextColor());
             graphics.drawString(text.getText(), (int)text.getPosition().getX(), (int)text.getPosition().getY());
         }
 

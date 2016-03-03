@@ -1,5 +1,6 @@
 package com.chalmers.ZombieKillah;
 
+import java.awt.*;
 import java.awt.geom.Point2D;
 
 /**
@@ -8,6 +9,7 @@ import java.awt.geom.Point2D;
 public class Text {
     private Point2D.Double position;
     private String text;
+    private Color textColor;
 
     public Text(Point2D.Double position, String text) {
         this.position = position;
@@ -20,5 +22,17 @@ public class Text {
 
     public String getText() {
         return text;
+    }
+
+    public Color getTextColor() {
+        return textColor;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setTextColor(Color textColor) {
+        this.textColor = textColor;
     }
 }

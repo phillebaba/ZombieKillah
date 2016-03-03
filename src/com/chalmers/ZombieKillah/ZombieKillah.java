@@ -10,6 +10,7 @@ import java.util.HashMap;
  */
 public class ZombieKillah extends Controller {
     private Player player;
+    private Text healthText;
 
     public ZombieKillah() {
         super(30, 30, 20, "Zombie Killah");
@@ -26,13 +27,16 @@ public class ZombieKillah extends Controller {
             addMovable(zombie);
         }
 
-        Text text = new Text(new Point2D.Double(30, 50), "Hello World");
-        addText(text);
+        this.healthText = new Text(new Point2D.Double(10, 20), "");
+        this.healthText.setTextColor(Color.white);
+        addText(healthText);
     }
 
     @Override
     public void update() {
         super.update();
+
+        healthText.setText("Health: " + new Integer((int)player.health).toString());
 
         checkInputs();
 
