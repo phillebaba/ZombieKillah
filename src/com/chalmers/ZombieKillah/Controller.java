@@ -188,10 +188,6 @@ public abstract class Controller {
         return texts;
     }
 
-    public Window getWindow() {
-        return window;
-    }
-
     /**
      * The internal class which will handles the run loop
      * which is required for the game to be able to update

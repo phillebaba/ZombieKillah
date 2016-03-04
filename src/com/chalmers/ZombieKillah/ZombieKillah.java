@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public class ZombieKillah extends Controller {
     private Player player;
-    private Text healthText;
+    private Text infoText;
 
     public ZombieKillah() {
         super(30, 30, 20, "Zombie Killah");
@@ -27,17 +27,17 @@ public class ZombieKillah extends Controller {
             addMovable(zombie);
         }
 
-        this.healthText = new Text(new Point2D.Double(10, 25), "");
-        this.healthText.setTextColor(Color.white);
-        this.healthText.setTextFont(new Font("Arial", Font.PLAIN, 25));
-        addText(healthText);
+        this.infoText = new Text(new Point2D.Double(10, 25), "");
+        this.infoText.setTextColor(Color.white);
+        this.infoText.setTextFont(new Font("Arial", Font.PLAIN, 25));
+        addText(infoText);
     }
 
     @Override
     public void update() {
         super.update();
 
-        healthText.setText("Health: " + new Integer((int)player.health).toString());
+        infoText.setText("Health: " + new Integer((int)player.health).toString() + " Kills: " + new Integer((int)Stats.getInstance().getKills()).toString());
 
         checkInputs();
 

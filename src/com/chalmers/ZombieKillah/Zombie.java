@@ -41,6 +41,7 @@ public class Zombie extends Character {
             takeDamage(bullet.getDamage());
 
             if (health <= 0) {
+                Stats.getInstance().addKill();
                 kill();
             }
         }
