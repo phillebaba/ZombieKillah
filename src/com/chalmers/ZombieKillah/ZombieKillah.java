@@ -11,6 +11,8 @@ import java.util.HashMap;
 public class ZombieKillah extends Controller {
     private Player player;
     private Text infoText;
+    private int lastSpawn;
+    private boolean spawnedZombie;
 
     public ZombieKillah() {
         super(30, 30, 20, "Zombie Killah");
@@ -22,25 +24,36 @@ public class ZombieKillah extends Controller {
         map.registerColorForClass(new Color(0x000000), Wall.class);
         addForegrounds(map.getObjects());
 
-        for (int i = 0; i < 10; i++) {
-            Zombie zombie = new Zombie((double)(100+(i*10)), (double)(i*25+50));
-            addMovable(zombie);
-        }
-
         this.infoText = new Text(new Point2D.Double(10, 25), "");
         this.infoText.setTextColor(Color.white);
         this.infoText.setTextFont(new Font("Arial", Font.PLAIN, 25));
         addText(infoText);
+
+        this.spawnedZombie = false;
+        this.lastSpawn = 0;
+        Stats.getInstance().startTimer();
+        start();
     }
 
     @Override
     public void update() {
         super.update();
 
-        infoText.setText("Health: " + new Integer((int)player.health).toString() + " Kills: " + new Integer((int)Stats.getInstance().getKills()).toString());
+        if (player.health <= 0) {
+            stop();
 
+            // show end game screen
+            // quit restart?
+
+            return;
+        }
+
+        // Text
+        String string = new String("Health: " + new Integer((int)player.health).toString() + " Kills: " + new Integer((int)Stats.getInstance().getKills()).toString() + " Time: " + new Integer((int)Stats.getInstance().getTime()).toString());
+        infoText.setText(string);
+
+        // Movement
         checkInputs();
-
         for (GameObject object: getMovable()) {
             if (object instanceof Zombie) {
                 ((Zombie) object).move(player.frame);
@@ -48,6 +61,41 @@ public class ZombieKillah extends Controller {
                 ((Bullet)object).step();
             }
         }
+
+        // Game logic
+        int currentTime = Stats.getInstance().getTime();
+        int kills = Stats.getInstance().getKills();
+
+        int modulus = 10;
+        if (kills < 3) {
+            modulus = 8;
+        } else if (kills < 5) {
+            modulus = 6;
+        } else if (kills < 10) {
+            modulus = 4;
+        } else if (kills < 15) {
+            modulus = 3;
+        } else if (kills < 20) {
+            modulus = 2;
+        } else if (kills < 30) {
+            modulus = 1;
+        }
+
+        if (currentTime%modulus == 0 && spawnedZombie == false) {
+            spawnZombie();
+        } else if (currentTime%modulus == 1) {
+            spawnedZombie = false;
+        }
+    }
+
+    private void spawnZombie() {
+        Point2D.Double spawnPoint = new Point2D.Double(100, 200);
+
+        Zombie zombie = new Zombie(spawnPoint.getX(), spawnPoint.getY());
+        addMovable(zombie);
+
+        lastSpawn = Stats.getInstance().getTime();
+        spawnedZombie = true;
     }
 
     private void checkInputs() {

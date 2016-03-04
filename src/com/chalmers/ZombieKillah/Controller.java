@@ -48,7 +48,7 @@ public abstract class Controller {
      * Starts a new thread if the game is not allready running,
      * will only be needed to be called at the beginning of a game.
      */
-    public void start() {
+    protected void start() {
         if (engine.isRunning)
             return;
 
@@ -62,7 +62,7 @@ public abstract class Controller {
      * overrides it if collision detection and object killing will
      * be done.
      */
-    public void update() {
+    protected void update() {
         Iterator iterator = all.iterator();
         while (iterator.hasNext()) {
             GameObject gameObject = (GameObject)iterator.next();
@@ -77,7 +77,7 @@ public abstract class Controller {
     /**
      * Will stop the game but not kill the thread.
      */
-    public void stop() {
+    protected void stop() {
         if (!engine.isRunning)
             return;
 
