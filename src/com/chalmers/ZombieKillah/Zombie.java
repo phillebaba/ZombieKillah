@@ -9,7 +9,7 @@ public class Zombie extends Character {
 
     public Zombie(double x, double y){
         super("Zombie", x, y);
-        this.speed = 0.1;
+        this.speed = 0.3;
 
         addWeapon(new Hand());
     }

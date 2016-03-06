@@ -6,7 +6,7 @@ package com.chalmers.ZombieKillah;
 public class Player extends Character {
     public Player(double x, double y) {
         super("Player", x, y);
-        this.speed = 2;
+        this.speed = 1.5;
 
         addWeapon(new Gun());
     }

@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Point2D;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Created by Philip Laine on 19/02/16.
@@ -12,7 +13,9 @@ public class ZombieKillah extends Controller {
     private Player player;
     private Text infoText;
     private int lastSpawn;
-    private boolean spawnedZombie;
+    private boolean spawnedZombie2;
+    private boolean spawnedZombie1;
+    private Random randomnr;
 
     public ZombieKillah() {
         super(30, 30, 20, "Zombie Killah");
@@ -29,8 +32,10 @@ public class ZombieKillah extends Controller {
         this.infoText.setTextFont(new Font("Arial", Font.PLAIN, 25));
         addText(infoText);
 
-        this.spawnedZombie = false;
+        this.spawnedZombie1 = false;
+        this.spawnedZombie2 = false;
         this.lastSpawn = 0;
+        this.randomnr = new Random();
         Stats.getInstance().startTimer();
         start();
     }
@@ -75,27 +80,35 @@ public class ZombieKillah extends Controller {
             modulus = 4;
         } else if (kills < 15) {
             modulus = 3;
-        } else if (kills < 20) {
+        } else if (kills < 2000) {
             modulus = 2;
-        } else if (kills < 30) {
-            modulus = 1;
         }
 
-        if (currentTime%modulus == 0 && spawnedZombie == false) {
+        if (currentTime%modulus == 0 && spawnedZombie1 == false && modulus != 2) {
             spawnZombie();
-        } else if (currentTime%modulus == 1) {
-            spawnedZombie = false;
+        }
+        else if(currentTime%modulus == 0 && spawnedZombie1 == false && modulus == 2 && spawnedZombie2 == false ){
+            spawnZombie();
+            spawnZombie();
+        }
+
+
+        else if (currentTime%modulus == 1) {
+            spawnedZombie1 = false;
+            spawnedZombie2 = false;
         }
     }
 
     private void spawnZombie() {
-        Point2D.Double spawnPoint = new Point2D.Double(100, 200);
+        int x = randomnr.nextInt (Controller.getWidth());
+        int y = randomnr.nextInt (Controller.getWidth());
+        Point2D.Double spawnPoint = new Point2D.Double(x, y);
 
         Zombie zombie = new Zombie(spawnPoint.getX(), spawnPoint.getY());
         addMovable(zombie);
 
         lastSpawn = Stats.getInstance().getTime();
-        spawnedZombie = true;
+        spawnedZombie1 = true;
     }
 
     private void checkInputs() {
