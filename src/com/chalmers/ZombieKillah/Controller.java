@@ -143,6 +143,10 @@ public abstract class Controller {
         background.add(gameObject);
     }
 
+    /**
+     * Adds multiple GameObjects to the background list
+     * @param gameObjects GameObject list to be added
+     */
     public void addBackgrounds(ArrayList<GameObject> gameObjects) {
         all.addAll(gameObjects);
         background.addAll(gameObjects);
@@ -161,21 +165,21 @@ public abstract class Controller {
     }
 
     /**
-     *
-     * @param text
+     * Adds a text object to the text list, which will be drawn
+     * in the next draw update
+     * @param text Text object to be added
      */
     public void addText(Text text) {
         texts.add(text);
     }
 
     /**
-     *
-     * @param text
+     * Removes a text object from the text list
+     * @param text Text object to be removed
      */
     public void removeText(Text text) {
         texts.remove(text);
     }
-
 
     public static int getHeight() {
         return height;

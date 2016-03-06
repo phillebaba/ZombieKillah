@@ -15,7 +15,7 @@ public class CollisionDetector {
      * Loops through all objects in the list and compares their
      * frames to each other, to see if any of them have collided, will
      * forward the colision to the individual objects
-     * @param gameObjects GameObjects to do collision checking on
+     * @param gameObjects GameObject list to do collision checking on
      */
     public static void checkCollisions(ArrayList<GameObject> gameObjects) {
         int index = 1;
