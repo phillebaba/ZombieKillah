@@ -6,9 +6,12 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by Jesper Rask on 2016-03-01.
+ * Adds an image to the incoming object, with different images depending on which direction
+ * the object is pointing at
+ * Created 01/03/16
+ * @author Daniel Posch, Jesper Rask, Sebastian Lind, Philip Laine
+ * @version 1.0.0 01/03/16
  */
-
 public class Image {
     private BufferedImage north;
     private BufferedImage south;
@@ -16,6 +19,11 @@ public class Image {
     private BufferedImage east;
     private BufferedImage currentImage;
 
+    /**
+     * Adds an image to the incoming object, with different images depending on which direction
+     * the object is pointing at
+     * @param path Gets the right image depending on what object is used
+     */
     public Image(String path) {
         this.south = loadImage(path + "-south" + ".png");
         this.north = loadImage(path + "-north" + ".png");
