@@ -9,6 +9,16 @@ import java.util.Random;
 /**
  * Created by Philip Laine on 19/02/16.
  */
+
+/**
+ * Has all the game logic and handle key input
+ * and the game setup
+ * @author Philip Laine
+ * @author Daniel Posch
+ * @author Jesper Rask
+ * @author Sebastian Lind
+ * @version 1.0.0 19/02/16
+ */
 public class ZombieKillah extends Controller {
     private Player player;
     private Text infoText;
@@ -17,6 +27,9 @@ public class ZombieKillah extends Controller {
     private boolean spawnedZombie1;
     private Random randomnr;
 
+    /**
+     * Sets up the game
+     */
     public ZombieKillah() {
         super(30, 30, 20, "Zombie Killah");
 
@@ -99,6 +112,9 @@ public class ZombieKillah extends Controller {
         }
     }
 
+    /**
+     * Spawns a zombie at a random location within the map
+     */
     private void spawnZombie() {
         int x = randomnr.nextInt (Controller.getWidth());
         int y = randomnr.nextInt (Controller.getWidth());
@@ -111,6 +127,9 @@ public class ZombieKillah extends Controller {
         spawnedZombie1 = true;
     }
 
+    /**
+     * Handles key input
+     */
     private void checkInputs() {
         HashMap<Integer, Boolean> keys = Input.getInstance().getKeys();
         if (keys.get(KeyEvent.VK_UP)) {
