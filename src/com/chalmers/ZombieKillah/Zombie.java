@@ -3,10 +3,21 @@ package com.chalmers.ZombieKillah;
 import java.awt.geom.Rectangle2D;
 
 /**
- * Created by Jesper Rask on 20/02/16.
+ * Class which represents the AI enemies in the game
+ * and includes a very simple pathfinding algorithm.
+ * Will always move in the direction of the player and
+ * try to collide with the player
+ * @author Jesper Rask
+ * @version 1.0.0 20/02/16
  */
 public class Zombie extends Character {
 
+    /**
+     * Simple constructor which create a
+     * zombie at a given position
+     * @param x Start position x coordinate
+     * @param y Start position y coordinate
+     */
     public Zombie(double x, double y){
         super("Zombie", x, y);
         this.speed = 0.1;
@@ -14,6 +25,12 @@ public class Zombie extends Character {
         addWeapon(new Hand());
     }
 
+    /**
+     * Will calculate a new direction for the Zombie to turn
+     * to given the destination and will call for the Zombie
+     * to step forward
+     * @param destination The destination rectangle which the Zombie wants to go to
+     */
     public void move(Rectangle2D.Double destination){
         double angle = Math.toDegrees(Math.atan2(destination.getCenterX() - frame.getCenterX(), destination.getCenterY() - frame.getCenterY()));
         angle = angle + Math.ceil(-angle / 360) * 360;
@@ -32,6 +49,12 @@ public class Zombie extends Character {
         super.step();
     }
 
+    /**
+     * Overrides on collision method to detect if collision has occured
+     * with a bullet, so that the Zombie responds to health damage when
+     * hit in a bullet
+     * @param object This is the object which has been collided with
+     */
     @Override
     public void onCollision(GameObject object) {
         super.onCollision(object);
