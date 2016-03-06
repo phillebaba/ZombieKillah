@@ -10,9 +10,8 @@ import java.util.Iterator;
  * but it will handle all of the game loop method calling for the
  * subclass.
  * @author Philip Laine
- * Created on 19/02/16
+ * @version 1.0.0 19/02/16
  */
-
 public abstract class Controller {
     private static int gridDimension;
     private static int width;
@@ -28,6 +27,14 @@ public abstract class Controller {
     private ArrayList<GameObject> background;
     private ArrayList<Text> texts;
 
+    /**
+     * Constructor to be used by the subclass so the needed
+     * recources are created before start is caled
+     * @param gridDimension Size of the sides of the grid
+     * @param columnCount Amount of objects horizontally
+     * @param rowCount Ammount of objects vertially
+     * @param title Title for the main JFrame
+     */
     public Controller(int gridDimension, int columnCount, int rowCount, String title) {
         this.gridDimension = gridDimension;
         this.width = gridDimension*rowCount;
@@ -107,16 +114,30 @@ public abstract class Controller {
     }
 
 
+    /**
+     * Adds a given GameObject to the foreground list which
+     * allows for collision of objects
+     * @param gameObject GameObject to be added
+     */
     public void addForeground(GameObject gameObject) {
         all.add(gameObject);
         foreground.add(gameObject);
     }
 
+    /**
+     * Adds a multiple GameObjects to the foreground list
+     * @param gameObjects List of GameObjects to be added
+     */
     public void addForegrounds(ArrayList<GameObject> gameObjects) {
         all.addAll(gameObjects);
         foreground.addAll(gameObjects);
     }
 
+    /**
+     * Adds a GameObject to the background list, which results
+     * in no collision being done, but it will be drawn
+     * @param gameObject GameObject to be added
+     */
     public void addBackground(GameObject gameObject) {
         all.add(gameObject);
         background.add(gameObject);

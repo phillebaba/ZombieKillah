@@ -3,9 +3,20 @@ package com.chalmers.ZombieKillah;
 import java.util.ArrayList;
 
 /**
- * Created by Philip Laine on 02/03/16.
+ * Implements simple collision detecting algorithm
+ * between two rectangles, does not do any colision
+ * avoidance. Will only tell objects that they have collided
+ * @author Philip Laine
+ * @version 1.0.0 02/03/16
  */
 public class CollisionDetector {
+
+    /**
+     * Loops through all objects in the list and compares their
+     * frames to each other, to see if any of them have collided, will
+     * forward the colision to the individual objects
+     * @param gameObjects GameObjects to do collision checking on
+     */
     public static void checkCollisions(ArrayList<GameObject> gameObjects) {
         int index = 1;
 
