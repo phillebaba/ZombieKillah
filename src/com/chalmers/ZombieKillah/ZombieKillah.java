@@ -7,14 +7,6 @@ import java.util.HashMap;
 import java.util.Random;
 
 /**
- * @author Philip Laine
- * @author Jesper Rask
- * @author Daniel Posch
- * @author Sebastian Lind
- * @version 1.0.0 19/02/16
- */
-
-/**
  * Has all the game logic and handle key input
  * and the game setup
  * @author Philip Laine
@@ -121,11 +113,7 @@ public class ZombieKillah extends Controller {
     }
 
     /**
-<<<<<<< HEAD
-     * Spawns a zombie at a random location within the map
-=======
-     * Creates a new zombie at a random location of the scree
->>>>>>> cab4e4c5fd4b1f24f9a23620a45265da717b9d12
+     * Creates a new zombie at a random location of the screen
      */
     private void spawnZombie() {
         int x = randomNumber.nextInt (Controller.getWidth() +5);
@@ -139,12 +127,8 @@ public class ZombieKillah extends Controller {
     }
 
     /**
-<<<<<<< HEAD
-     * Handles key input
-=======
      * Checks for any input events and will react appropriatly
      * for any of the events
->>>>>>> cab4e4c5fd4b1f24f9a23620a45265da717b9d12
      */
     private void checkInputs() {
         HashMap<Integer, Boolean> keys = Input.getInstance().getKeys();
