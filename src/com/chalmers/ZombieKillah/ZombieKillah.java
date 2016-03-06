@@ -111,8 +111,8 @@ public class ZombieKillah extends Controller {
      * Creates a new zombie at a random location of the scree
      */
     private void spawnZombie() {
-        int x = randomNumber.nextInt (Controller.getWidth());
-        int y = randomNumber.nextInt (Controller.getHeight());
+        int x = randomNumber.nextInt (Controller.getWidth() +5);
+        int y = randomNumber.nextInt (Controller.getHeight() +5);
         Point2D.Double spawnPoint = new Point2D.Double(x, y);
 
         Zombie zombie = new Zombie(spawnPoint.getX(), spawnPoint.getY());
