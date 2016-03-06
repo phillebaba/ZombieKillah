@@ -32,16 +32,16 @@ public class Stats {
     }
 
     /**
-     * Starts the game played timer
+     * Resets the values and starts the timer
      */
-    public void startTimer() {
-        timer.start();
-    }
-    /**
-     * Stops the game played timer
-     */
-    public void stopTimer() {
+    public void reset() {
         timer.stop();
+
+        time = 0;
+        shots = 0;
+        kills = 0;
+
+        timer.start();
     }
 
     /**

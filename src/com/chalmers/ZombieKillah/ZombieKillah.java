@@ -1,5 +1,6 @@
 package com.chalmers.ZombieKillah;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Point2D;
@@ -7,29 +8,21 @@ import java.util.HashMap;
 import java.util.Random;
 
 /**
- * Has all the game logic and handle key input
- * and the game setup
  * @author Philip Laine
- * @author Daniel Posch
  * @author Jesper Rask
+ * @author Daniel Posch
  * @author Sebastian Lind
  * @version 1.0.0 19/02/16
  */
-public class ZombieKillah extends Controller {
+public class ZombieKillah extends AbstractController {
     private Player player;
     private Text infoText;
     private boolean spawnedZombie2;
     private boolean spawnedZombie1;
     private Random randomNumber;
 
-    /**
-     * Sets up the game
-     */
     public ZombieKillah() {
         super(30, 30, 20, "Zombie Killah");
-
-        this.player = new Player(30, 100);
-        addMovable(this.player);
 
         Map map = new Map("Map");
         map.registerColorForClass(new Color(0x000000), Wall.class);
@@ -40,12 +33,7 @@ public class ZombieKillah extends Controller {
         this.infoText.setTextFont(new Font("Arial", Font.PLAIN, 25));
         addText(infoText);
 
-        this.spawnedZombie1 = false;
-        this.spawnedZombie2 = false;
-        this.randomNumber = new Random();
-        Stats.getInstance().startTimer();
-
-        start();
+        newGame();
     }
 
     /**
@@ -57,13 +45,34 @@ public class ZombieKillah extends Controller {
     public void update() {
         super.update();
 
-        if (player.health <= 0) {
-            stop();
+        if (player.health == 0) {
+            pause();
 
-            // show end game screen
-            // quit restart?
+            JFrame frame = new JFrame("Game Over");
+            frame.setLocationRelativeTo(null);
+            frame.setResizable(false);
+            frame.setVisible(true);
 
-            return;
+            JLabel label = new JLabel("<html>You Lost!<br>Kills:<br>Time:<br>Score:</html>");
+            label.setHorizontalAlignment(SwingConstants.CENTER);
+
+            JButton button = new JButton("Play Again");
+            button.addActionListener(ActionEvent -> {
+                frame.setVisible(false);
+                frame.dispose();
+
+                clearMovables();
+                newGame();
+            });
+
+            Container container = frame.getContentPane();
+            FlowLayout layout = new FlowLayout();
+            layout.setAlignment(FlowLayout.LEADING);
+            container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
+
+            container.add(label);
+            container.add(button);
+            frame.pack();
         }
 
         // Text
@@ -113,11 +122,26 @@ public class ZombieKillah extends Controller {
     }
 
     /**
-     * Creates a new zombie at a random location of the screen
+     * Sets up the minimum requirements to play the game
+     */
+    private void newGame() {
+        this.player = new Player(30, 100);
+        addMovable(this.player);
+
+        this.spawnedZombie1 = false;
+        this.spawnedZombie2 = false;
+        this.randomNumber = new Random();
+        Stats.getInstance().reset();
+
+        start();
+    }
+
+    /**
+     * Creates a new zombie at a random location of the scree
      */
     private void spawnZombie() {
-        int x = randomNumber.nextInt (Controller.getWidth() +5);
-        int y = randomNumber.nextInt (Controller.getHeight() +5);
+        int x = randomNumber.nextInt (AbstractController.getWidth());
+        int y = randomNumber.nextInt (AbstractController.getHeight());
         Point2D.Double spawnPoint = new Point2D.Double(x, y);
 
         Zombie zombie = new Zombie(spawnPoint.getX(), spawnPoint.getY());

@@ -31,6 +31,7 @@ public class Window {
         this.canvas.setMaximumSize(new Dimension(width, height));
         this.canvas.setMinimumSize(new Dimension(width, height));
         this.canvas.setPreferredSize(new Dimension(width, height));
+        this.canvas.addKeyListener(Input.getInstance());
 
         this.frame = new JFrame(title);
         this.frame.setSize(width, height);
@@ -40,7 +41,6 @@ public class Window {
         this.frame.setResizable(false);
         this.frame.add(canvas);
         this.frame.pack();
-        this.frame.addKeyListener(Input.getInstance()); // Set frame key listener
 
         this.canvas.createBufferStrategy(2); // Create buffer strategy, must be called after setting frame
         this.bufferStrategy = canvas.getBufferStrategy();
