@@ -1,16 +1,29 @@
 package com.chalmers.ZombieKillah;
 
 /**
- * Created by Philip Laine on 20/02/24.
+ * Represent a player object which is a sub class to @Character
+ *
+ * @author  Philip Laine
+ * @author  Sebastian Lind
+ * @version 1.0.0  20/02/16.
  */
 public class Player extends Character {
+    /**
+     * Initializes a new player object, adds a new gun to weapon ArrayList
+     * @param x
+     * @param y
+     */
     public Player(double x, double y) {
         super("Player", x, y);
-        this.speed = 2;
+        this.speed = 1.5;
 
         addWeapon(new Gun());
     }
 
+    /**Changes the direction of the player or
+     *  calls for the @step method.
+     * @param direction get new direction of player object
+     */
     public void turn(Direction direction) {
         if (this.direction == direction) {
             super.step();
@@ -19,6 +32,11 @@ public class Player extends Character {
         }
     }
 
+    /**
+     * Checks for Collision if this object collides with an object of type
+     * zombie we call for the @takeDamage
+     * @param object This is the object which has been collided with
+     */
     @Override
     public void onCollision(GameObject object) {
         super.onCollision(object);
