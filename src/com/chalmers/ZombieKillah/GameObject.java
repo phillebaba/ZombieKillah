@@ -38,7 +38,6 @@ public abstract class GameObject {
      * Will only be called if both objects are collidable.
      * @param object This is the object which has been collided with
      */
-
     public void onCollision(GameObject object) {
 
     }
