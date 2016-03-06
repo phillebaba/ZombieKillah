@@ -22,7 +22,7 @@ public class Player extends Character {
 
     /**Changes the direction of the player or
      *  calls for the @step method.
-     * @param direction
+     * @param direction get new direction of player object
      */
     public void turn(Direction direction) {
         if (this.direction == direction) {
