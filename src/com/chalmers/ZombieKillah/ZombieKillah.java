@@ -7,7 +7,11 @@ import java.util.HashMap;
 import java.util.Random;
 
 /**
- * Created by Philip Laine on 19/02/16.
+ * @author Philip Laine
+ * @author Jesper Rask
+ * @author Daniel Posch
+ * @author Sebastian Lind
+ * @version 1.0.0 19/02/16
  */
 
 /**
@@ -22,10 +26,9 @@ import java.util.Random;
 public class ZombieKillah extends Controller {
     private Player player;
     private Text infoText;
-    private int lastSpawn;
     private boolean spawnedZombie2;
     private boolean spawnedZombie1;
-    private Random randomnr;
+    private Random randomNumber;
 
     /**
      * Sets up the game
@@ -40,19 +43,24 @@ public class ZombieKillah extends Controller {
         map.registerColorForClass(new Color(0x000000), Wall.class);
         addForegrounds(map.getObjects());
 
-        this.infoText = new Text(new Point2D.Double(10, 25), "");
+        this.infoText = new Text(new Point2D.Double(10, 23), "");
         this.infoText.setTextColor(Color.white);
         this.infoText.setTextFont(new Font("Arial", Font.PLAIN, 25));
         addText(infoText);
 
         this.spawnedZombie1 = false;
         this.spawnedZombie2 = false;
-        this.lastSpawn = 0;
-        this.randomnr = new Random();
+        this.randomNumber = new Random();
         Stats.getInstance().startTimer();
+
         start();
     }
 
+    /**
+     * Overrides the main update method to implement
+     * custom game functionality for ZombieKillah,
+     * all object updates are done here
+     */
     @Override
     public void update() {
         super.update();
@@ -113,22 +121,30 @@ public class ZombieKillah extends Controller {
     }
 
     /**
+<<<<<<< HEAD
      * Spawns a zombie at a random location within the map
+=======
+     * Creates a new zombie at a random location of the scree
+>>>>>>> cab4e4c5fd4b1f24f9a23620a45265da717b9d12
      */
     private void spawnZombie() {
-        int x = randomnr.nextInt (Controller.getWidth());
-        int y = randomnr.nextInt (Controller.getWidth());
+        int x = randomNumber.nextInt (Controller.getWidth() +5);
+        int y = randomNumber.nextInt (Controller.getHeight() +5);
         Point2D.Double spawnPoint = new Point2D.Double(x, y);
 
         Zombie zombie = new Zombie(spawnPoint.getX(), spawnPoint.getY());
         addMovable(zombie);
 
-        lastSpawn = Stats.getInstance().getTime();
         spawnedZombie1 = true;
     }
 
     /**
+<<<<<<< HEAD
      * Handles key input
+=======
+     * Checks for any input events and will react appropriatly
+     * for any of the events
+>>>>>>> cab4e4c5fd4b1f24f9a23620a45265da717b9d12
      */
     private void checkInputs() {
         HashMap<Integer, Boolean> keys = Input.getInstance().getKeys();
