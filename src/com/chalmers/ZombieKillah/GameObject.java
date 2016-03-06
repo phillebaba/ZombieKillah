@@ -46,7 +46,7 @@ public abstract class GameObject {
         this.visible = true;
         this.indestructable = false;
 
-        this.frame = new Rectangle2D.Double(x, y, Controller.getGridDimension(), Controller.getGridDimension());
+        this.frame = new Rectangle2D.Double(x, y, AbstractController.getGridDimension(), AbstractController.getGridDimension());
     }
 
     /**

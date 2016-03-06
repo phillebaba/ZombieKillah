@@ -60,13 +60,13 @@ public class Map {
     public ArrayList<GameObject> getObjects() {
         ArrayList<GameObject> objects = new ArrayList<>();
 
-        for (int y = 0; y < (Controller.getHeight()/Controller.getGridDimension()); y++) {
-            for (int x = 0; x < (Controller.getWidth()/Controller.getGridDimension()); x++) {
+        for (int y = 0; y < (AbstractController.getHeight()/AbstractController.getGridDimension()); y++) {
+            for (int x = 0; x < (AbstractController.getWidth()/AbstractController.getGridDimension()); x++) {
                 Color color = new Color(mapImage.getRGB(x, y));
                 if (color != Color.white && classMap.containsKey(color)) {
                     try {
                         Constructor constructor = classMap.get(color).getConstructor(double.class, double.class);
-                        objects.add(((GameObject) constructor.newInstance(x * Controller.getGridDimension(), y * Controller.getGridDimension())));
+                        objects.add(((GameObject) constructor.newInstance(x * AbstractController.getGridDimension(), y * AbstractController.getGridDimension())));
                     } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
                         e.printStackTrace();
                         System.exit(1);

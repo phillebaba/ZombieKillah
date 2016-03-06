@@ -12,14 +12,13 @@ import java.util.Iterator;
  * @author Philip Laine
  * @version 1.0.0 19/02/16
  */
-public abstract class Controller {
+public abstract class AbstractController {
     private static int gridDimension;
     private static int width;
     private static int height;
 
     private Window window;
     private Engine engine;
-    private Thread thread;
 
     private ArrayList<GameObject> all;
     private ArrayList<MovableObject> movable;
@@ -29,20 +28,19 @@ public abstract class Controller {
 
     /**
      * Constructor to be used by the subclass so the needed
-     * recources are created before start is caled
+     * instance variables are created before start is called
      * @param gridDimension Size of the sides of the grid
      * @param columnCount Amount of objects horizontally
-     * @param rowCount Ammount of objects vertially
+     * @param rowCount Ammount of objects vertically
      * @param title Title for the main JFrame
      */
-    public Controller(int gridDimension, int columnCount, int rowCount, String title) {
+    public AbstractController(int gridDimension, int columnCount, int rowCount, String title) {
         this.gridDimension = gridDimension;
         this.width = gridDimension*columnCount;
         this.height = gridDimension*rowCount;
 
         this.window = new Window(this.width, this.height, title);
         this.engine = new Engine();
-
 
         this.all = new ArrayList<>();
         this.movable =  new ArrayList<>();
@@ -52,15 +50,32 @@ public abstract class Controller {
     }
 
     /**
-     * Starts a new thread if the game is not allready running,
-     * will only be needed to be called at the beginning of a game.
+     * Starts a new thread if the engine is not running
+     * and will unpause the game if the engine is running
      */
     protected void start() {
-        if (engine.isRunning)
-            return;
+        if (!engine.isRunning()) {
+            Thread thread = new Thread(engine);
+            thread.run();
+        } else {
+            engine.setPaused(false);
+        }
+    }
 
-        thread = new Thread(engine);
-        thread.run();
+    /**
+     * Will pause the game which suspends the
+     * update loop until further
+     */
+    protected void pause() {
+        engine.setPaused(true);
+    }
+
+    /**
+     * Stops the game completly which means that
+     * no process will be running anymore
+     */
+    protected void stop() {
+        engine.setRunning(false);
     }
 
     /**
@@ -79,16 +94,6 @@ public abstract class Controller {
         }
 
         CollisionDetector.checkCollisions(foreground);
-    }
-
-    /**
-     * Will stop the game but not kill the thread.
-     */
-    protected void stop() {
-        if (!engine.isRunning)
-            return;
-
-        engine.isRunning = false;
     }
 
     /**
@@ -113,6 +118,14 @@ public abstract class Controller {
         foreground.addAll(movableObjects);
     }
 
+    /**
+     * Clears the movable list
+     */
+    public void clearMovables() {
+        all.removeAll(movable);
+        foreground.removeAll(movable);
+        movable.clear();
+    }
 
     /**
      * Adds a given GameObject to the foreground list which
@@ -131,6 +144,14 @@ public abstract class Controller {
     public void addForegrounds(ArrayList<GameObject> gameObjects) {
         all.addAll(gameObjects);
         foreground.addAll(gameObjects);
+    }
+
+    /**
+     * Clears the foreground list
+     */
+    public void clearForeground() {
+        all.removeAll(foreground);
+        foreground.clear();
     }
 
     /**
@@ -153,14 +174,10 @@ public abstract class Controller {
     }
 
     /**
-     * Removes all of the objects from all of the object
-     * lists. This will result in the objects being cleared
-     * from the screen in the next draw update.
+     * Clears the background
      */
-    public void clearAllObjects() {
-        all.clear();
-        movable.clear();
-        foreground.clear();
+    public void clearBackground() {
+        all.removeAll(background);
         background.clear();
     }
 
@@ -221,7 +238,8 @@ public abstract class Controller {
      * the thread.
      */
     class Engine implements Runnable {
-        private boolean isRunning = false;
+        private boolean running = false;
+        private boolean paused = false;
         private double frameCap = 1.0 / 60.0;
 
         /**
@@ -233,7 +251,7 @@ public abstract class Controller {
          */
         @Override
         public void run() {
-            isRunning = true;
+            running = true;
 
             double firstTime = 0;
             double lastTime = System.nanoTime() / 1000000000.0;
@@ -242,33 +260,41 @@ public abstract class Controller {
             double frameTime = 0;
             int frameCount = 0;
 
-            while (isRunning) {
-                boolean render = false;
+            while (running) {
+                if (!paused) {
+                    boolean render = false;
 
-                firstTime = System.nanoTime() / 1000000000.0;
-                passedTime = firstTime - lastTime;
-                lastTime = firstTime;
+                    firstTime = System.nanoTime() / 1000000000.0;
+                    passedTime = firstTime - lastTime;
+                    lastTime = firstTime;
 
-                unprocessedTime += passedTime;
-                frameTime += passedTime;
+                    unprocessedTime += passedTime;
+                    frameTime += passedTime;
 
-                while (unprocessedTime >= frameCap) {
-                    update();
+                    while (unprocessedTime >= frameCap) {
+                        update();
 
-                    unprocessedTime -= frameCap;
-                    render = true;
+                        unprocessedTime -= frameCap;
+                        render = true;
 
-                    if (frameTime >= 1) {
-                        logFrameRate(frameCount);
-                        frameTime = 0;
-                        frameCount = 0;
+                        if (frameTime >= 1) {
+                            logFrameRate(frameCount);
+                            frameTime = 0;
+                            frameCount = 0;
+                        }
                     }
-                }
 
-                if (render) {
-                    window.clear();
-                    window.draw(getAll(), getTexts());
-                    frameCount++;
+                    if (render) {
+                        window.clear();
+                        window.draw(getAll(), getTexts());
+                        frameCount++;
+                    } else {
+                        try {
+                            Thread.sleep(1);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 } else {
                     try {
                         Thread.sleep(1);
@@ -285,6 +311,23 @@ public abstract class Controller {
          */
         public void logFrameRate(int frameRate) {
             System.out.println(frameRate);
+        }
+
+
+        public boolean isRunning() {
+            return running;
+        }
+
+        public boolean isPaused() {
+            return paused;
+        }
+
+        public void setPaused(boolean paused) {
+            this.paused = paused;
+        }
+
+        public void setRunning(boolean running) {
+            this.running = running;
         }
     }
 }
