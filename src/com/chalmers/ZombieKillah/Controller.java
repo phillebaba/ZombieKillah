@@ -37,10 +37,10 @@ public abstract class Controller {
      */
     public Controller(int gridDimension, int columnCount, int rowCount, String title) {
         this.gridDimension = gridDimension;
-        this.width = gridDimension*rowCount;
-        this.height = gridDimension*columnCount;
+        this.width = gridDimension*columnCount;
+        this.height = gridDimension*rowCount;
 
-        this.window = new Window(height, width, title);
+        this.window = new Window(this.width, this.height, title);
         this.engine = new Engine();
 
 
