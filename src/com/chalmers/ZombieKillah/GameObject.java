@@ -5,6 +5,14 @@ import java.awt.geom.Rectangle2D;
 /**
  * Created by Philip Laine on 20/02/16.
  */
+
+/**
+ * Creates a game object for the game, this object is supposed to check if the object collides with anything,
+ * and removes health if isn't indestructable.
+ * Created 20/02/16
+ * @author Philip Laine, Sebastian Lind, Daniel Posch
+ * @Version 1.0.0 20/02/16
+ */
 public abstract class GameObject {
     private boolean alive;
     protected Image image;
