@@ -9,7 +9,10 @@ import java.io.IOException;
  * Adds an image to the incoming object, with different images depending on which direction
  * the object is pointing at
  * Created 01/03/16
- * @author Daniel Posch, Jesper Rask, Sebastian Lind, Philip Laine
+ * @author Daniel Posch
+ * @author Jesper Rask
+ * @author Sebastian Lind
+ * @author Philip Laine
  * @version 1.0.0 01/03/16
  */
 public class Image {
@@ -33,6 +36,11 @@ public class Image {
         currentImage = north;
     }
 
+    /**
+     * Gets an image from the selected path
+     * @param path Gets the search path of the image
+     * @return Returns the image if the search path is correct, returns null if it isn't.
+     */
     private BufferedImage loadImage(String path)  {
         try {
             return ImageIO.read(new File(path));
@@ -44,6 +52,10 @@ public class Image {
         return null;
     }
 
+    /**
+     * Updates the image if depending on the direction
+     * @param direction
+     */
     public void updateImage(GameObject.Direction direction) {
         switch (direction) {
             case NORTH:

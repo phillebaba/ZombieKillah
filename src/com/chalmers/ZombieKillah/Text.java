@@ -6,12 +6,23 @@ import java.awt.geom.Point2D;
 /**
  * Created by Philip Laine on 03/03/16.
  */
+
+/**
+ * Creates textObject's
+ * @author Philip Laine
+ * @version 1.0.0 03/03/16
+ */
 public class Text {
     private Point2D.Double position;
     private String text;
     private Color textColor;
     private Font textFont;
 
+    /**
+     * Creates a text
+     * @param position The position of the textObject
+     * @param text The text that will be written to the object
+     */
     public Text(Point2D.Double position, String text) {
         this.position = position;
         this.text = text;

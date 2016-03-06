@@ -8,11 +8,24 @@ import java.util.ArrayList;
 /**
  * Created by Jesper Rask on 2016-02-19.
  */
+
+/**
+ * Creates a window for the game, with a set size and title of the window and draws to the window
+ * @author Daniel Posch
+ * @author Jesper Rask
+ * @version 1.0.0 19/09/16
+ */
 public class Window {
     private JFrame frame;
     private Canvas canvas;
     private BufferStrategy bufferStrategy;
 
+    /**
+     * Creates a window for the game, with a set size and title of the window
+     * @param width The width of the widow
+     * @param height The height of the winow
+     * @param title The title of the window
+     */
     public Window(int width, int height, String title) {
         this.canvas = new Canvas();
         this.canvas.setMaximumSize(new Dimension(width, height));
@@ -33,10 +46,18 @@ public class Window {
         this.bufferStrategy = canvas.getBufferStrategy();
     }
 
+    /**
+     * Clears the buffer strategy
+     */
     public void clear() {
         bufferStrategy.getDrawGraphics().clearRect(0, 0, frame.getWidth(), frame.getHeight());
     }
 
+    /**
+     * Draws the objects in the ArrayList's to the window
+     * @param objects The gameObject's that will be drawn
+     * @param texts TextObject's that will be drawn
+     */
     public void draw(ArrayList<GameObject> objects, ArrayList<Text> texts) {
         Graphics graphics = bufferStrategy.getDrawGraphics();
 

@@ -9,6 +9,7 @@ import java.awt.geom.Rectangle2D;
  * Takes care of so not the same type of objects stack on top of each other.
  * Does all of the movement in the game.
  * @author Philip Laine
+ * @author Sebastian Lind
  * @version 1.0.0 20/02/16.
  */
 public abstract class MovableObject extends GameObject {
