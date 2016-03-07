@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,7 +31,7 @@ public class Map {
      */
     public Map(String path) {
         try {
-            this.mapImage = ImageIO.read(new File(path + ".png"));
+            this.mapImage = ImageIO.read(getClass().getClassLoader().getResource("Map.png"));
         } catch(IOException e){
             e.printStackTrace();
             System.exit(1);

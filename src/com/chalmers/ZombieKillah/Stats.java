@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
  * Creates a HUD of how much health the player have left, how many zombies the player have killed
  *  and how much time have passed since the game started.
  *  @author Philip Laine
- *  @Version 1.0.0
+ *  @version 1.0.0
  *  Created 02/03/16.
  */
 public class Stats {

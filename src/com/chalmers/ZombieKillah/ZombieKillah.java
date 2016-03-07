@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 /**
+ * Game logic
  * @author Philip Laine
  * @author Jesper Rask
  * @author Daniel Posch
