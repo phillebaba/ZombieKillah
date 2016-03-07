@@ -12,7 +12,7 @@ import java.util.Random;
  * @author Jesper Rask
  * @author Daniel Posch
  * @author Sebastian Lind
- * @version 1.0.0 19/02/16
+ * @version 1.0.1 19/02/16
  */
 public class ZombieKillah extends AbstractController {
     private Player player;
