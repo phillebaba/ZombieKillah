@@ -28,10 +28,10 @@ public class Image {
      * @param path Gets the right image depending on what object is used
      */
     public Image(String path) {
-        this.south = loadImage(path + "-south" + ".png");
-        this.north = loadImage(path + "-north" + ".png");
-        this.west = loadImage(path + "-west" + ".png");
-        this.east = loadImage(path + "-east" + ".png");
+        this.south = loadImage(path + "-South" + ".png");
+        this.north = loadImage(path + "-North" + ".png");
+        this.west = loadImage(path + "-West" + ".png");
+        this.east = loadImage(path + "-East" + ".png");
 
         currentImage = north;
     }
@@ -43,7 +43,7 @@ public class Image {
      */
     private BufferedImage loadImage(String path)  {
         try {
-            return ImageIO.read(new File(path));
+            return ImageIO.read(getClass().getClassLoader().getResource(path));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
