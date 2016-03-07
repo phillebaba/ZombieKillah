@@ -3,9 +3,13 @@ package com.chalmers.ZombieKillah;
 import java.awt.event.*;
 import javax.swing.*;
 
-
 /**
- * Created by Sebastian Lind on 2016-02-23.
+ * Is meant to encapsulate the use of all objects
+ * which can damage other GameObjects, comes with
+ * the needed cooldown so that instant kills dont
+ * happen by misstake
+ * @author Philip Laine
+ * @version 1.0.2 6/3/16
  */
 public abstract class Weapon {
     private Timer timer;
@@ -13,6 +17,12 @@ public abstract class Weapon {
     private double damage;
     private double coolDownTime;
 
+    /**
+     * Create a Weapon with a give ooldown time and damage
+     * factor
+     * @param coolDownTime The cooldown time in seconds
+     * @param damage The damage inflicted by the weapon
+     */
     public Weapon (double coolDownTime, double damage){
         this.usable = true;
         this.coolDownTime = coolDownTime;
@@ -25,6 +35,12 @@ public abstract class Weapon {
         this.timer = new Timer((int)(coolDownTime * 1000), actionListener);
     }
 
+    /**
+     * Registers a use and starts
+     * the cool down process, to wait
+     * for the next use
+     * @return The damage made by the use of this weapon
+     */
     protected double use() {
         if (usable) {
             usable = false;
