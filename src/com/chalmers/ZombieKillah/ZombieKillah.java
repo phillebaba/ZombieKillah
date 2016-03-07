@@ -12,7 +12,7 @@ import java.util.Random;
  * @author Jesper Rask
  * @author Daniel Posch
  * @author Sebastian Lind
- * @version 1.0.0 19/02/16
+ * @version 1.0.1 19/02/16
  */
 public class ZombieKillah extends AbstractController {
     private Player player;
@@ -53,8 +53,9 @@ public class ZombieKillah extends AbstractController {
             frame.setResizable(false);
             frame.setVisible(true);
 
-            JLabel label = new JLabel("<html>You Lost!<br>Kills:<br>Time:<br>Score:</html>");
+            JLabel label = new JLabel("<html>You Lost!<br>Kills:" + Stats.getInstance().getKills() + "<br>Time:"  + Stats.getInstance().getTime() + "</html>");
             label.setHorizontalAlignment(SwingConstants.CENTER);
+            label.setVerticalAlignment(SwingConstants.CENTER);
 
             JButton button = new JButton("Play Again");
             button.addActionListener(ActionEvent -> {
@@ -66,10 +67,8 @@ public class ZombieKillah extends AbstractController {
             });
 
             Container container = frame.getContentPane();
-            FlowLayout layout = new FlowLayout();
-            layout.setAlignment(FlowLayout.LEADING);
-            container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
-
+            GridLayout layout = new GridLayout(2, 1, 15, 10);
+            container.setLayout(layout);
             container.add(label);
             container.add(button);
             frame.pack();
